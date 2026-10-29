@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Assignments 1-4</title>
+    <link rel="stylesheet" href="assign.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Assignment 1: Styled Webpage */
+        .website-header {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        nav {
+            background: #0f172a;
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+        }
+
+        nav a:hover {
+            color: #93c5fd;
+        }
+
+        .section {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 25px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #2563eb;
+            margin-bottom: 12px;
+        }
+
+        /* Assignment 2: Resume */
+        .resume {
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px #00000015;
+        }
+
+        .resume-header {
+            background: #17365d;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .resume-header h2 {
+            color: white;
+        }
+
+        .resume section {
+            margin-bottom: 22px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Assignment 3: Profile Card */
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            padding: 40px 15px;
+            background: #dbeafe;
+        }
+
+        .profile-card {
+            width: 350px;
+            padding: 30px;
+            margin: 10px;
+            border: 2px solid #bfdbfe;
+            border-radius: 15px;
+            background: white;
+            text-align: center;
+            box-shadow: 0 8px 20px #00000015;
+        }
+
+        .avatar {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            font-size: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .skills span {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 5px 2px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            border-radius: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        /* Assignment 4: Landing Page */
+        .hero {
+            padding: 70px 20px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(135deg, #172554, #2563eb, #7c3aed);
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            margin-bottom: 20px;
+        }
+
+        .hero .button {
+            background: white;
+            color: #1d4ed8;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 35px 15px;
+        }
+
+        .feature {
+            width: 250px;
+            padding: 25px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        footer {
+            padding: 20px;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .resume {
+                margin: 15px;
+                padding: 18px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Assignment 1: Styled Webpage -->
+    <header class="website-header" id="home">
+        <h1>Welcome to My Website</h1>
+        <p>Learn, Explore and Grow</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#resume">Resume</a>
+        <a href="#profile">Profile</a>
+        <a href="#landing">Landing Page</a>
+    </nav>
+
+    <section class="section" id="about">
+        <h2>Assignment 1: About Us</h2>
+        <p>This webpage demonstrates CSS styling, colors, spacing,
+           borders, margins, padding and typography.</p>
+        <h3>Our Services</h3>
+        <ul>
+            <li>Web Development</li>
+            <li>Programming Tutorials</li>
+            <li>Technical Support</li>
+        </ul>
+    </section>
+
+    <!-- Assignment 2: Resume -->
+    <div class="resume" id="resume">
+        <header class="resume-header">
+            <h1>Ansh Pratap Srivastava</h1>
+            <h2>BCA Artificial Intelligence Student</h2>
+            <p>Lakhimpur Kheri, Uttar Pradesh, India</p>
+            <p>Email: a3902179@gmail.com</p>
+        </header>
+
+        <section>
+            <h2>Career Objective</h2>
+            <p>Motivated student interested in programming,
+               artificial intelligence and web development.</p>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <h3>BCA Artificial Intelligence</h3>
+            <p>Invertis University, Bareilly — 2nd Year</p>
+        </section>
+
+        <section>
+            <h2>Technical Skills</h2>
+            <ul>
+                <li>Python</li>
+                <li>HTML and CSS</li>
+                <li>SQL and DBMS</li>
+                <li>Power BI</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Projects</h2>
+            <p>Product Inventory System</p>
+            <p>Employee Attrition Prediction</p>
+        </section>
+    </div>
+
+    <!-- Assignment 3: Profile Card -->
+    <section class="profile-container" id="profile">
+        <div class="profile-card">
+            <div class="avatar">A</div>
+            <h2>Ansh Pratap Srivastava</h2>
+            <p>BCA AI Student</p>
+
+            <p>Passionate about technology, coding and AI.</p>
+
+            <div class="skills">
+                <span>Python</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>SQL</span>
+            </div>
+
+            <a href="mailto:a3902179@gmail.com" class="button">
+                Contact Me
+            </a>
+        </div>
+    </section>
+
+    <!-- Assignment 4: Landing Page -->
+    <section class="hero" id="landing">
+        <h1>Build Your Future with Technology</h1>
+        <p>Learn new skills, explore innovative ideas
+           and create something amazing.</p>
+        <a href="#features" class="button">Explore More</a>
+    </section>
+
+    <section class="features" id="features">
+        <div class="feature">
+            <h2>Web Development</h2>
+            <p>Create modern and responsive websites.</p>
+        </div>
+
+        <div class="feature">
+            <h2>Artificial Intelligence</h2>
+            <p>Explore intelligent and smart solutions.</p>
+        </div>
+
+        <div class="feature">
+            <h2>Innovation</h2>
+            <p>Turn your creative ideas into projects.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 My Website. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
