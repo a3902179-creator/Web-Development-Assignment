@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments 25–28 | Arrays & Strings Toolkit</title>
+    <link rel="stylesheet" href="assign7.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <p class="eyebrow">WEB DEVELOPMENT • ASSIGNMENTS 25–28</p>
+            <h1>Arrays &amp; Strings Toolkit</h1>
+            <p>Four practical JavaScript utilities in one clean, responsive webpage.</p>
+            <nav class="quick-nav" aria-label="Assignment navigation">
+                <a href="#q25">Q25 Shopping List</a>
+                <a href="#q26">Q26 Products</a>
+                <a href="#q27">Q27 Text Cleaner</a>
+                <a href="#q28">Q28 Problem Set</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Assignment 25 -->
+        <section class="card" id="q25">
+            <div class="section-heading">
+                <span class="number">25</span>
+                <div>
+                    <p class="eyebrow">ARRAYS</p>
+                    <h2>Shopping List Manager</h2>
+                    <p>Add items, remove individual items, or clear the entire list.</p>
+                </div>
+            </div>
+
+            <form id="shoppingForm" class="inline-form">
+                <label class="sr-only" for="shoppingInput">Shopping item</label>
+                <input id="shoppingInput" type="text" maxlength="80"
+                       placeholder="e.g. Milk, Bread, Apples" autocomplete="off" required>
+                <button type="submit">Add item</button>
+            </form>
+
+            <div class="list-toolbar">
+                <p id="shoppingCount" class="muted" aria-live="polite">0 items</p>
+                <button type="button" id="clearShopping" class="button secondary">Clear list</button>
+            </div>
+
+            <ul id="shoppingList" class="shopping-list"></ul>
+            <p id="shoppingMessage" class="status" aria-live="polite"></p>
+        </section>
+
+        <!-- Assignment 26 -->
+        <section class="card" id="q26">
+            <div class="section-heading">
+                <span class="number">26</span>
+                <div>
+                    <p class="eyebrow">FILTER • REDUCE • SEARCH</p>
+                    <h2>Product Dataset Analyzer</h2>
+                    <p>Search products, filter by category and maximum price, and summarize the results.</p>
+                </div>
+            </div>
+
+            <div class="filters">
+                <div class="field">
+                    <label for="productSearch">Search product</label>
+                    <input id="productSearch" type="search" placeholder="Type a product name">
+                </div>
+
+                <div class="field">
+                    <label for="categoryFilter">Category</label>
+                    <select id="categoryFilter">
+                        <option value="All">All categories</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Food">Food</option>
+                        <option value="Books">Books</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="maxPrice">Maximum price (₹)</label>
+                    <input id="maxPrice" type="number" min="0" step="any" placeholder="No limit">
+                </div>
+
+                <button type="button" id="resetFilters" class="button secondary filter-reset">
+                    Reset filters
+                </button>
+            </div>
+
+            <div class="summary-grid" aria-live="polite">
+                <div class="summary-tile">
+                    <span>Products shown</span>
+                    <strong id="productCount">0</strong>
+                </div>
+                <div class="summary-tile">
+                    <span>Total units in stock</span>
+                    <strong id="stockUnits">0</strong>
+                </div>
+                <div class="summary-tile">
+                    <span>Stock value</span>
+                    <strong id="stockValue">₹0</strong>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productTable"></tbody>
+                </table>
+            </div>
+            <p id="productMessage" class="status" aria-live="polite"></p>
+        </section>
+
+        <!-- Assignment 27 -->
+        <section class="card" id="q27">
+            <div class="section-heading">
+                <span class="number">27</span>
+                <div>
+                    <p class="eyebrow">STRING METHODS</p>
+                    <h2>Text-Cleaning Utility</h2>
+                    <p>Clean up text before using it in a form or dataset.</p>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="rawText">Text to clean</label>
+                <textarea id="rawText" rows="5"
+                    placeholder="Example:    HELLO     World!!!  "></textarea>
+            </div>
+
+            <div class="options">
+                <label>
+                    <input type="checkbox" id="removeSpecial">
+                    Remove punctuation and special characters
+                </label>
+                <label>
+                    <input type="checkbox" id="lowercase">
+                    Convert to lowercase
+                </label>
+                <label>
+                    <input type="checkbox" id="uppercase">
+                    Convert to uppercase
+                </label>
+            </div>
+
+            <div class="button-row">
+                <button type="button" id="cleanButton">Clean text</button>
+                <button type="button" id="clearText" class="button secondary">Clear</button>
+                <button type="button" id="copyText" class="button secondary">Copy result</button>
+            </div>
+
+            <div class="result-panel">
+                <div class="result-title">
+                    <h3>Cleaned result</h3>
+                    <span id="characterCount" class="muted">0 characters</span>
+                </div>
+                <p id="cleanedOutput" class="output" aria-live="polite">
+                    Your cleaned text will appear here.
+                </p>
+            </div>
+            <p id="textMessage" class="status" aria-live="polite"></p>
+        </section>
+
+        <!-- Assignment 28 -->
+        <section class="card" id="q28">
+            <div class="section-heading">
+                <span class="number">28</span>
+                <div>
+                    <p class="eyebrow">PRACTICE SET</p>
+                    <h2>Arrays &amp; Strings Problem Set</h2>
+                    <p>Choose a problem and enter text or comma-separated values.</p>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="problemInput">Input</label>
+                <textarea id="problemInput" rows="3"
+                    placeholder="Examples: madam | apple, banana, apple | 10, 20, 30"></textarea>
+            </div>
+
+            <div class="field">
+                <label for="problemType">Select a problem</label>
+                <select id="problemType">
+                    <option value="reverse">Reverse text</option>
+                    <option value="palindrome">Check palindrome</option>
+                    <option value="vowels">Count vowels</option>
+                    <option value="longest">Find longest word</option>
+                    <option value="unique">Remove duplicate values</option>
+                    <option value="sort">Sort comma-separated values</option>
+                    <option value="stats">Numeric array statistics</option>
+                </select>
+            </div>
+
+            <button type="button" id="solveButton">Run problem</button>
+
+            <div class="result-panel">
+                <h3>Result</h3>
+                <pre id="problemOutput" class="output" aria-live="polite">Your result will appear here.</pre>
+            </div>
+            <p id="problemMessage" class="status" aria-live="polite"></p>
+        </section>
+
+        <section class="note-card">
+            <h2>What this project demonstrates</h2>
+            <p>
+                Arrays, strings, event listeners, input validation,
+                <code>filter()</code>, <code>reduce()</code>, <code>map()</code>,
+                <code>every()</code>, <code>Set</code>, and DOM updates.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Assignments 25–28 • Arrays &amp; Strings Practice</p>
+    </footer>
+
+    <script>
+    // ==========================================
+    // ASSIGNMENT 25: SHOPPING LIST MANAGER
+    // ==========================================
+
+    const shoppingForm = document.getElementById("shoppingForm");
+    const shoppingInput = document.getElementById("shoppingInput");
+    const shoppingList = document.getElementById("shoppingList");
+    const shoppingCount = document.getElementById("shoppingCount");
+    const shoppingMessage = document.getElementById("shoppingMessage");
+    const clearShoppingButton = document.getElementById("clearShopping");
+
+    let shoppingItems = [];
+
+    function renderShoppingList() {
+        shoppingList.replaceChildren();
+
+        if (shoppingItems.length === 0) {
+            const emptyItem = document.createElement("li");
+            emptyItem.textContent = "Your shopping list is empty. Add an item above.";
+            emptyItem.className = "muted";
+            shoppingList.appendChild(emptyItem);
+        } else {
+            shoppingItems.forEach((item, index) => {
+                const listItem = document.createElement("li");
+                const name = document.createElement("span");
+                const removeButton = document.createElement("button");
+
+                name.className = "shopping-item-name";
+                name.textContent = item;
+
+                removeButton.type = "button";
+                removeButton.className = "remove-item";
+                removeButton.textContent = "Remove";
+                removeButton.setAttribute("aria-label", `Remove ${item}`);
+
+                removeButton.addEventListener("click", () => {
+                    shoppingItems.splice(index, 1);
+                    renderShoppingList();
+                    setStatus(shoppingMessage, `"${item}" removed from the list.`);
+                });
+
+                listItem.append(name, removeButton);
+                shoppingList.appendChild(listItem);
+            });
+        }
+
+        shoppingCount.textContent =
+            `${shoppingItems.length} ${shoppingItems.length === 1 ? "item" : "items"}`;
+    }
+
+    shoppingForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const item = shoppingInput.value.trim();
+
+        if (!item) {
+            setStatus(shoppingMessage, "Please enter an item.", true);
+            return;
+        }
+
+        shoppingItems.push(item);
+        shoppingInput.value = "";
+        renderShoppingList();
+        setStatus(shoppingMessage, `"${item}" added successfully.`);
+        shoppingInput.focus();
+    });
+
+    clearShoppingButton.addEventListener("click", () => {
+        shoppingItems = [];
+        renderShoppingList();
+        setStatus(shoppingMessage, "Shopping list cleared.");
+    });
+
+
+    // ==========================================
+    // ASSIGNMENT 26: PRODUCT DATASET ANALYZER
+    // ==========================================
+
+    const products = [
+        { name: "Laptop", category: "Electronics", price: 55000, stock: 8 },
+        { name: "Headphones", category: "Electronics", price: 1500, stock: 25 },
+        { name: "Smartphone", category: "Electronics", price: 22000, stock: 12 },
+        { name: "T-Shirt", category: "Clothing", price: 500, stock: 40 },
+        { name: "Jeans", category: "Clothing", price: 1200, stock: 18 },
+        { name: "Rice", category: "Food", price: 700, stock: 30 },
+        { name: "Chocolate", category: "Food", price: 100, stock: 50 },
+        { name: "JavaScript Book", category: "Books", price: 650, stock: 14 },
+        { name: "Python Book", category: "Books", price: 800, stock: 10 },
+        { name: "Keyboard", category: "Electronics", price: 900, stock: 0 }
+    ];
+
+    const productSearch = document.getElementById("productSearch");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const maxPriceInput = document.getElementById("maxPrice");
+    const productTable = document.getElementById("productTable");
+    const productCount = document.getElementById("productCount");
+    const stockUnits = document.getElementById("stockUnits");
+    const stockValue = document.getElementById("stockValue");
+    const productMessage = document.getElementById("productMessage");
+
+    function formatCurrency(value) {
+        return "₹" + value.toLocaleString("en-IN", {
+            maximumFractionDigits: 2
+        });
+    }
+
+    function renderProducts() {
+        const query = productSearch.value.trim().toLowerCase();
+        const category = categoryFilter.value;
+        const maxPriceText = maxPriceInput.value;
+        const maxPrice = maxPriceText === "" ? Infinity : Number(maxPriceText);
+
+        productTable.replaceChildren();
+        setStatus(productMessage, "");
+
+        if (maxPriceText !== "" && (!Number.isFinite(maxPrice) || maxPrice < 0)) {
+            updateProductSummary(0, 0, 0);
+            setStatus(productMessage, "Enter a valid maximum price (zero or greater).", true);
+            return;
+        }
+
+        const filteredProducts = products.filter((product) => {
+            const matchesSearch = product.name.toLowerCase().includes(query);
+            const matchesCategory = category === "All" || product.category === category;
+            const matchesPrice = product.price <= maxPrice;
+
+            return matchesSearch && matchesCategory && matchesPrice;
+        });
+
+        filteredProducts.forEach((product) => {
+            const row = document.createElement("tr");
+            const values = [
+                product.name,
+                product.category,
+                formatCurrency(product.price),
+                product.stock
+            ];
+
+            values.forEach((value) => {
+                const cell = document.createElement("td");
+                cell.textContent = value;
+                row.appendChild(cell);
+            });
+
+            productTable.appendChild(row);
+        });
+
+        const totalUnits = filteredProducts.reduce(
+            (sum, product) => sum + product.stock, 0
+        );
+
+        const totalStockValue = filteredProducts.reduce(
+            (sum, product) => sum + product.price * product.stock, 0
+        );
+
+        updateProductSummary(
+            filteredProducts.length,
+            totalUnits,
+            totalStockValue
+        );
+
+        if (filteredProducts.length === 0) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+            cell.colSpan = 4;
+            cell.textContent = "No products match your filters.";
+            row.appendChild(cell);
+            productTable.appendChild(row);
+        }
+    }
+
+    function updateProductSummary(count, units, value) {
+        productCount.textContent = count;
+        stockUnits.textContent = units;
+        stockValue.textContent = formatCurrency(value);
+    }
+
+    [productSearch, categoryFilter, maxPriceInput].forEach((control) => {
+        control.addEventListener("input", renderProducts);
+        control.addEventListener("change", renderProducts);
+    });
+
+    document.getElementById("resetFilters").addEventListener("click", () => {
+        productSearch.value = "";
+        categoryFilter.value = "All";
+        maxPriceInput.value = "";
+        renderProducts();
+    });
+
+
+    // ==========================================
+    // ASSIGNMENT 27: TEXT-CLEANING UTILITY
+    // ==========================================
+
+    const rawText = document.getElementById("rawText");
+    const cleanedOutput = document.getElementById("cleanedOutput");
+    const characterCount = document.getElementById("characterCount");
+    const textMessage = document.getElementById("textMessage");
+    const removeSpecial = document.getElementById("removeSpecial");
+    const lowercase = document.getElementById("lowercase");
+    const uppercase = document.getElementById("uppercase");
+
+    let cleanedText = "";
+
+    function cleanText() {
+        let result = rawText.value
+            .normalize("NFKC")
+            .trim()
+            .replace(/\s+/g, " ");
+
+        if (removeSpecial.checked) {
+            result = result.replace(/[^\p{L}\p{N}\s]/gu, "");
+            result = result.replace(/\s+/g, " ").trim();
+        }
+
+        if (lowercase.checked && uppercase.checked) {
+            setStatus(textMessage, "Choose lowercase or uppercase, not both.", true);
+            return;
+        }
+
+        if (lowercase.checked) {
+            result = result.toLowerCase();
+        } else if (uppercase.checked) {
+            result = result.toUpperCase();
+        }
+
+        cleanedText = result;
+        cleanedOutput.textContent = result || "(No text remaining after cleaning.)";
+        characterCount.textContent =
+            `${result.length} ${result.length === 1 ? "character" : "characters"}`;
+
+        setStatus(
+            textMessage,
+            result ? "Text cleaned successfully." : "Enter some text to clean."
+        );
+    }
+
+    document.getElementById("cleanButton").addEventListener("click", cleanText);
+
+    document.getElementById("clearText").addEventListener("click", () => {
+        rawText.value = "";
+        cleanedText = "";
+        cleanedOutput.textContent = "Your cleaned text will appear here.";
+        characterCount.textContent = "0 characters";
+        setStatus(textMessage, "");
+    });
+
+    document.getElementById("copyText").addEventListener("click", async () => {
+        if (!cleanedText) {
+            setStatus(textMessage, "Clean some text first.", true);
+            return;
+        }
+
+        try {
+            await navigator.clipboard.writeText(cleanedText);
+            setStatus(textMessage, "Cleaned text copied to clipboard.");
+        } catch (error) {
+            setStatus(
+                textMessage,
+                "Clipboard unavailable here. Select and copy the result manually.",
+                true
+            );
+        }
+    });
+
+
+    // ==========================================
+    // ASSIGNMENT 28: ARRAYS & STRINGS PROBLEM SET
+    // ==========================================
+
+    const problemInput = document.getElementById("problemInput");
+    const problemType = document.getElementById("problemType");
+    const problemOutput = document.getElementById("problemOutput");
+    const problemMessage = document.getElementById("problemMessage");
+
+    function solveProblem() {
+        const input = problemInput.value.trim();
+        const type = problemType.value;
+
+        setStatus(problemMessage, "");
+
+        if (!input) {
+            problemOutput.textContent = "Please enter some input first.";
+            setStatus(problemMessage, "Input is required.", true);
+            return;
+        }
+
+        let result = "";
+
+        switch (type) {
+            case "reverse":
+                result = Array.from(input).reverse().join("");
+                break;
+
+            case "palindrome": {
+                const normalized = input.toLowerCase()
+                    .replace(/[^\p{L}\p{N}]/gu, "");
+
+                if (!normalized) {
+                    result = "Enter at least one letter or number.";
+                } else {
+                    result = normalized === Array.from(normalized).reverse().join("")
+                        ? "Yes — this is a palindrome."
+                        : "No — this is not a palindrome.";
+                }
+                break;
+            }
+
+            case "vowels": {
+                const matches = input.match(/[aeiou]/gi);
+                result = `Vowel count: ${matches ? matches.length : 0}`;
+                break;
+            }
+
+            case "longest": {
+                const words = input.match(/[\p{L}\p{N}]+/gu) || [];
+
+                if (words.length === 0) {
+                    result = "No words found.";
+                } else {
+                    const longest = words.reduce(
+                        (best, word) => word.length > best.length ? word : best,
+                        ""
+                    );
+
+                    result = `Longest word: ${longest}\nLength: ${longest.length} characters`;
+                }
+                break;
+            }
+
+            case "unique": {
+                const values = input.split(",")
+                    .map(value => value.trim())
+                    .filter(Boolean);
+
+                const uniqueValues = [...new Set(values)];
+
+                result =
+                    `Original item count: ${values.length}\n` +
+                    `Unique item count: ${uniqueValues.length}\n\n` +
+                    `Result:\n${uniqueValues.join(", ") || "(none)"}`;
+                break;
+            }
+
+            case "sort": {
+                const values = input.split(",")
+                    .map(value => value.trim())
+                    .filter(Boolean);
+
+                values.sort((a, b) => a.localeCompare(b, undefined, {
+                    numeric: true,
+                    sensitivity: "base"
+                }));
+
+                result = `Sorted values:\n${values.join(", ") || "(none)"}`;
+                break;
+            }
+
+            case "stats": {
+                const parts = input.split(",").map(value => value.trim());
+                const numbers = parts.map(Number);
+
+                if (
+                    parts.some(value => value === "") ||
+                    numbers.some(value => !Number.isFinite(value))
+                ) {
+                    result = "Invalid input. Enter numbers separated by commas, e.g. 10, 20, 30.";
+                    break;
+                }
+
+                const sum = numbers.reduce((total, number) => total + number, 0);
+                const average = sum / numbers.length;
+
+                result =
+                    `Count: ${numbers.length}\n` +
+                    `Sum: ${sum}\n` +
+                    `Average: ${average.toFixed(2)}\n` +
+                    `Minimum: ${Math.min(...numbers)}\n` +
+                    `Maximum: ${Math.max(...numbers)}`;
+                break;
+            }
+
+            default:
+                result = "Please select a valid problem.";
+        }
+
+        problemOutput.textContent = result;
+    }
+
+    document.getElementById("solveButton")
+        .addEventListener("click", solveProblem);
+
+
+    // Shared helper for status messages.
+    function setStatus(element, message, isError = false) {
+        element.textContent = message;
+        element.classList.toggle("error", isError);
+    }
+
+    // Initial page render.
+    renderShoppingList();
+    renderProducts();
+    </script>
+</body>
+</html>

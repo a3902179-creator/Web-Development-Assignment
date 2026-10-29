@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments 33–36 | JSON and DOM</title>
+    <link rel="stylesheet" href="assign9.css">
+</head>
+<body>
+<header>
+    <h1>JSON, Object Utilities & DOM Basics</h1>
+    <p>JavaScript Assignments 33–36</p>
+    <nav>
+        <a href="#a33">Assignment 33</a>
+        <a href="#a34">Assignment 34</a>
+        <a href="#a35">Assignment 35</a>
+        <a href="#a36">Assignment 36</a>
+    </nav>
+</header>
+
+<main>
+    <!-- Assignment 33 -->
+    <section class="card" id="a33">
+        <h2>Assignment 33: Create and Validate catalogue.json</h2>
+        <p>
+            Load the JSON file, parse its contents and validate the
+            catalogue structure and product fields.
+        </p>
+
+        <button onclick="loadCatalogue()">Load catalogue.json</button>
+        <button class="secondary" onclick="validateCatalogue()">Validate Data</button>
+        <p id="jsonStatus" class="status" aria-live="polite">
+            Click Load catalogue.json to begin.
+        </p>
+        <pre id="jsonOutput">Catalogue data will appear here.</pre>
+
+        <h3>Validation Rules</h3>
+        <ul>
+            <li>The JSON must be valid and parseable.</li>
+            <li>A catalogue object and products array must exist.</li>
+            <li>Each product must have a unique numeric ID.</li>
+            <li>Name and category must be non-empty strings.</li>
+            <li>Price must be a non-negative number.</li>
+            <li>inStock must be a Boolean.</li>
+            <li>Specifications must be an object.</li>
+        </ul>
+    </section>
+
+    <!-- Assignment 34 -->
+    <section class="card" id="a34">
+        <h2>Assignment 34: Catalogue Data and Object Utilities</h2>
+        <p>Explore Object.keys(), Object.values() and Object.entries().</p>
+
+        <label for="utilitySelect">Select an operation</label>
+        <select id="utilitySelect">
+            <option value="keys">Object.keys()</option>
+            <option value="values">Object.values()</option>
+            <option value="entries">Object.entries()</option>
+        </select>
+        <button onclick="runUtility()">Run Utility</button>
+        <pre id="utilityOutput">Select an operation to see its result.</pre>
+
+        <h3>Test Scenarios</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test</th>
+                        <th>Scenario</th>
+                        <th>Expected Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Parse valid JSON</td>
+                        <td>JSON object is created</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Read product names</td>
+                        <td>All product names are listed</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Get object keys</td>
+                        <td>Property names are returned</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Filter in-stock products</td>
+                        <td>Only available products are returned</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Parse invalid JSON</td>
+                        <td>A parsing error is reported</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Assignment 35 -->
+    <section class="card" id="a35">
+        <h2>Assignment 35: Label DOM Node Relationships</h2>
+        <p>Use this sample HTML document to explore parent, child and sibling relationships.</p>
+
+        <div id="domSample" class="dom-sample">
+            <div id="parentNode" class="parent-node">
+                Parent: section
+                <p id="firstChild" class="child-node">First child paragraph</p>
+                <p id="secondChild" class="child-node">Second child paragraph</p>
+                <span id="thirdChild" class="child-node">Third child span</span>
+            </div>
+        </div>
+
+        <label for="nodeSelect">Select a node</label>
+        <select id="nodeSelect">
+            <option value="parentNode">Parent section</option>
+            <option value="firstChild">First paragraph</option>
+            <option value="secondChild">Second paragraph</option>
+            <option value="thirdChild">Third span</option>
+        </select>
+        <button onclick="inspectNode()">Inspect Relationships</button>
+        <pre id="relationshipOutput">Node relationships will appear here.</pre>
+
+        <h3>Relationship Definitions</h3>
+        <ul>
+            <li><strong>parentElement:</strong> The direct parent HTML element.</li>
+            <li><strong>children:</strong> The direct child elements.</li>
+            <li><strong>nextElementSibling:</strong> The next element at the same level.</li>
+            <li><strong>previousElementSibling:</strong> The previous element at the same level.</li>
+        </ul>
+    </section>
+
+    <!-- Assignment 36 -->
+    <section class="card" id="a36">
+        <h2>Assignment 36: Element-Selection Challenge Sheet</h2>
+        <p>Practice common DOM selectors using the sample elements below.</p>
+
+        <div id="selectionSample" class="selection-sample">
+            <h3 id="sampleHeading">DOM Practice Heading</h3>
+            <p class="sample-text">First sample paragraph</p>
+            <p class="sample-text">Second sample paragraph</p>
+            <button class="sample-button">Sample Button One</button>
+            <button class="sample-button">Sample Button Two</button>
+        </div>
+
+        <label for="selectorSelect">Choose a selector</label>
+        <select id="selectorSelect">
+            <option value="id">getElementById()</option>
+            <option value="class">getElementsByClassName()</option>
+            <option value="tag">getElementsByTagName()</option>
+            <option value="query">querySelector()</option>
+            <option value="queryAll">querySelectorAll()</option>
+        </select>
+
+        <label for="selectorInput">Selector value</label>
+        <input id="selectorInput" type="text" value="sampleHeading"
+               placeholder="For example: sampleHeading or .sample-text">
+
+        <button onclick="runSelector()">Run Selector</button>
+        <button class="secondary" onclick="resetHighlights()">Reset Highlights</button>
+        <pre id="selectorOutput">Selector results will appear here.</pre>
+
+        <h3>Challenge Sheet</h3>
+        <ol>
+            <li>Select the heading using its ID.</li>
+            <li>Select both paragraphs using their class.</li>
+            <li>Select all buttons using their tag name.</li>
+            <li>Select the first paragraph using querySelector().</li>
+            <li>Select all paragraphs using querySelectorAll().</li>
+        </ol>
+    </section>
+</main>
+
+<footer>
+    <p>JavaScript Practice | JSON & DOM</p>
+</footer>
+
+<script>
+    // Assignment 33: Load and validate catalogue.json
+    let catalogueData = null;
+
+    async function loadCatalogue() {
+        const status = document.getElementById("jsonStatus");
+        const output = document.getElementById("jsonOutput");
+
+        try {
+            const response = await fetch("./catalogue.json");
+
+            if (!response.ok) {
+                throw new Error("Could not load catalogue.json.");
+            }
+
+            catalogueData = await response.json();
+            output.textContent = JSON.stringify(catalogueData, null, 2);
+
+            const result = validateCatalogue();
+            status.textContent = result.valid
+                ? "JSON loaded and validated successfully."
+                : "JSON loaded, but validation found errors.";
+            status.className = result.valid ? "status success" : "status error";
+        } catch (error) {
+            status.textContent =
+                error.message + " Run the page with VS Code Live Server.";
+            status.className = "status error";
+            output.textContent =
+                "Check that catalogue.json is in the same folder as the HTML file.";
+        }
+    }
+
+    function validateCatalogue() {
+        const status = document.getElementById("jsonStatus");
+
+        if (!catalogueData) {
+            status.textContent = "Load catalogue.json first.";
+            status.className = "status error";
+            return { valid: false, errors: ["No catalogue loaded"] };
+        }
+
+        const errors = [];
+        const catalogue = catalogueData.catalogue;
+
+        if (!catalogue || typeof catalogue !== "object") {
+            errors.push("Missing catalogue object.");
+        } else if (!Array.isArray(catalogue.products)) {
+            errors.push("catalogue.products must be an array.");
+        } else {
+            const ids = new Set();
+
+            catalogue.products.forEach((product, index) => {
+                const label = "Product " + (index + 1);
+
+                if (!Number.isInteger(product.id)) {
+                    errors.push(label + ": ID must be an integer.");
+                } else if (ids.has(product.id)) {
+                    errors.push(label + ": ID must be unique.");
+                } else {
+                    ids.add(product.id);
+                }
+
+                if (typeof product.name !== "string" || !product.name.trim()) {
+                    errors.push(label + ": name must be a non-empty string.");
+                }
+
+                if (typeof product.category !== "string" || !product.category.trim()) {
+                    errors.push(label + ": category must be a non-empty string.");
+                }
+
+                if (typeof product.price !== "number" ||
+                    !Number.isFinite(product.price) || product.price < 0) {
+                    errors.push(label + ": price must be a non-negative number.");
+                }
+
+                if (typeof product.inStock !== "boolean") {
+                    errors.push(label + ": inStock must be Boolean.");
+                }
+
+                if (!product.specifications ||
+                    typeof product.specifications !== "object" ||
+                    Array.isArray(product.specifications)) {
+                    errors.push(label + ": specifications must be an object.");
+                }
+            });
+        }
+
+        const valid = errors.length === 0;
+
+        status.textContent = valid
+            ? "Validation passed. All catalogue checks are successful."
+            : "Validation failed:\n" + errors.join("\n");
+
+        status.className = valid ? "status success" : "status error";
+
+        return { valid, errors };
+    }
+
+    // Assignment 34: Object utilities
+    function runUtility() {
+        if (!catalogueData) {
+            document.getElementById("utilityOutput").textContent =
+                "Please load catalogue.json in Assignment 33 first.";
+            return;
+        }
+
+        const products = catalogueData.catalogue.products;
+        const operation = document.getElementById("utilitySelect").value;
+        let result;
+
+        if (operation === "keys") {
+            result = products.map(product => Object.keys(product));
+        } else if (operation === "values") {
+            result = products.map(product => Object.values(product));
+        } else {
+            result = products.map(product => Object.entries(product));
+        }
+
+        document.getElementById("utilityOutput").textContent =
+            JSON.stringify(result, null, 2);
+
+        const available = products.filter(product => product.inStock);
+        document.getElementById("utilityOutput").textContent +=
+            "\n\nIn-stock products:\n" +
+            JSON.stringify(available.map(product => product.name), null, 2);
+    }
+
+    // Assignment 35: Inspect DOM node relationships
+    function inspectNode() {
+        const id = document.getElementById("nodeSelect").value;
+        const node = document.getElementById(id);
+
+        const details = {
+            selectedNode: node.tagName.toLowerCase(),
+            text: node.textContent.trim(),
+            parentElement: node.parentElement
+                ? node.parentElement.tagName.toLowerCase()
+                : null,
+            children: Array.from(node.children).map(child =>
+                child.tagName.toLowerCase()
+            ),
+            previousElementSibling: node.previousElementSibling
+                ? node.previousElementSibling.tagName.toLowerCase()
+                : null,
+            nextElementSibling: node.nextElementSibling
+                ? node.nextElementSibling.tagName.toLowerCase()
+                : null
+        };
+
+        document.getElementById("relationshipOutput").textContent =
+            JSON.stringify(details, null, 2);
+    }
+
+    // Assignment 36: DOM element-selection challenge
+    function resetHighlights() {
+        document.querySelectorAll("#selectionSample .highlight")
+            .forEach(element => element.classList.remove("highlight"));
+
+        document.getElementById("selectorOutput").textContent =
+            "Highlights reset. Choose a selector to begin.";
+    }
+
+    function runSelector() {
+        resetHighlights();
+
+        const type = document.getElementById("selectorSelect").value;
+        const value = document.getElementById("selectorInput").value.trim();
+        const output = document.getElementById("selectorOutput");
+        const scope = document.getElementById("selectionSample");
+
+        if (!value) {
+            output.textContent = "Enter a selector value.";
+            return;
+        }
+
+        let selected = [];
+        let description = "";
+
+        try {
+            if (type === "id") {
+                const element = document.getElementById(value);
+                if (element && scope.contains(element)) selected = [element];
+                description = "getElementById()";
+            } else if (type === "class") {
+                selected = Array.from(scope.getElementsByClassName(value));
+                description = "getElementsByClassName()";
+            } else if (type === "tag") {
+                selected = Array.from(scope.getElementsByTagName(value));
+                description = "getElementsByTagName()";
+            } else if (type === "query") {
+                const element = scope.querySelector(value);
+                if (element) selected = [element];
+                description = "querySelector()";
+            } else {
+                selected = Array.from(scope.querySelectorAll(value));
+                description = "querySelectorAll()";
+            }
+
+            selected.forEach(element => element.classList.add("highlight"));
+
+            output.textContent = JSON.stringify({
+                method: description,
+                selector: value,
+                elementsFound: selected.length,
+                matchedElements: selected.map(element => ({
+                    tag: element.tagName.toLowerCase(),
+                    id: element.id || null,
+                    className: typeof element.className === "string"
+                        ? element.className
+                        : "",
+                    text: element.textContent.trim()
+                }))
+            }, null, 2);
+
+            if (selected.length === 0) {
+                output.textContent += "\n\nNo matching elements found.";
+            }
+        } catch (error) {
+            output.textContent =
+                "Invalid selector or value. Check your input and try again.";
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,622 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments 41–44 | Dynamic UI & Forms</title>
+    <link rel="stylesheet" href="assign11.css">
+</head>
+<body>
+<header>
+    <h1>Dynamic UI, Forms & To-Do App</h1>
+    <p>JavaScript Assignments 41–44</p>
+    <nav aria-label="Assignment navigation">
+        <a href="#a41">Reading List</a>
+        <a href="#a42">Contact Form</a>
+        <a href="#a43">Test Matrix</a>
+        <a href="#a44">To-Do App</a>
+    </nav>
+</header>
+
+<main>
+    <!-- Assignment 41 -->
+    <section class="panel" id="a41">
+        <h2>Assignment 41: Dynamic Reading List</h2>
+        <p>Add books to your reading list, mark them as read and remove them.</p>
+
+        <form id="bookForm" class="form-grid">
+            <div>
+                <label for="bookTitle">Book Title</label>
+                <input id="bookTitle" type="text" maxlength="100"
+                       placeholder="Enter book title" required>
+            </div>
+            <div>
+                <label for="bookAuthor">Author</label>
+                <input id="bookAuthor" type="text" maxlength="80"
+                       placeholder="Enter author name" required>
+            </div>
+            <div class="full-width">
+                <button type="submit">Add Book</button>
+            </div>
+        </form>
+
+        <p id="bookMessage" class="message" role="status" aria-live="polite"></p>
+        <div class="stats">
+            <span>Total Books: <strong id="bookTotal">0</strong></span>
+            <span>Read: <strong id="bookRead">0</strong></span>
+            <span>Unread: <strong id="bookUnread">0</strong></span>
+        </div>
+        <div id="bookList" class="item-list">
+            <p class="empty">Your reading list is empty.</p>
+        </div>
+    </section>
+
+    <!-- Assignment 42 -->
+    <section class="panel" id="a42">
+        <h2>Assignment 42: Contact Form and Submission Summary</h2>
+        <p>Fill in the form to display a summary of your submission.</p>
+
+        <form id="contactForm">
+            <label for="contactName">Full Name</label>
+            <input id="contactName" name="name" type="text"
+                   minlength="2" maxlength="80" required>
+
+            <label for="contactEmail">Email Address</label>
+            <input id="contactEmail" name="email" type="email"
+                   maxlength="120" required>
+
+            <label for="contactSubject">Subject</label>
+            <select id="contactSubject" name="subject" required>
+                <option value="">Select a subject</option>
+                <option value="General Enquiry">General Enquiry</option>
+                <option value="Project Support">Project Support</option>
+                <option value="Feedback">Feedback</option>
+            </select>
+
+            <label for="contactMessage">Message</label>
+            <textarea id="contactMessage" name="message" rows="4"
+                      minlength="10" maxlength="500" required></textarea>
+
+            <button type="submit">Submit Contact Form</button>
+            <button type="reset" class="secondary">Reset</button>
+        </form>
+
+        <p id="contactStatus" class="message" role="status" aria-live="polite"></p>
+
+        <div id="contactSummary" class="summary" hidden>
+            <h3>Submission Summary</h3>
+            <p><strong>Name:</strong> <span id="summaryName"></span></p>
+            <p><strong>Email:</strong> <span id="summaryEmail"></span></p>
+            <p><strong>Subject:</strong> <span id="summarySubject"></span></p>
+            <p><strong>Message:</strong></p>
+            <p id="summaryMessage" class="summary-message"></p>
+        </div>
+    </section>
+
+    <!-- Assignment 43 -->
+    <section class="panel" id="a43">
+        <h2>Assignment 43: Validation Test Matrix</h2>
+        <p>Use this table to document expected and actual validation results.</p>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Test Scenario</th>
+                        <th>Test Input</th>
+                        <th>Expected Result</th>
+                        <th>Actual Result</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="testMatrix">
+                    <tr>
+                        <td>TC01</td>
+                        <td>Valid contact form</td>
+                        <td>Valid name, email, subject and message</td>
+                        <td>Submission summary appears</td>
+                        <td>Not run</td>
+                        <td><span class="test-pending">Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>TC02</td>
+                        <td>Empty name</td>
+                        <td>Name left blank</td>
+                        <td>Form is not submitted</td>
+                        <td>Not run</td>
+                        <td><span class="test-pending">Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>TC03</td>
+                        <td>Invalid email</td>
+                        <td>ansh.example.com</td>
+                        <td>Browser validation blocks submission</td>
+                        <td>Not run</td>
+                        <td><span class="test-pending">Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>TC04</td>
+                        <td>Short message</td>
+                        <td>Less than 10 characters</td>
+                        <td>Validation blocks submission</td>
+                        <td>Not run</td>
+                        <td><span class="test-pending">Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>TC05</td>
+                        <td>Missing subject</td>
+                        <td>Default subject selected</td>
+                        <td>Form is not submitted</td>
+                        <td>Not run</td>
+                        <td><span class="test-pending">Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>TC06</td>
+                        <td>Reset form</td>
+                        <td>Click Reset</td>
+                        <td>Fields and summary are cleared</td>
+                        <td>Not run</td>
+                        <td><span class="test-pending">Pending</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <button type="button" id="runTests">Run Validation Tests</button>
+        <p id="testSummary" class="message" role="status" aria-live="polite">
+            Automated test results have not been generated yet.
+        </p>
+        <p class="note">
+            These are automated checks of the validation rules. Browser-level
+            required-field and email validation should also be tested manually.
+        </p>
+    </section>
+
+    <!-- Assignment 44 -->
+    <section class="panel" id="a44">
+        <h2>Assignment 44: Complete To-Do App</h2>
+        <p>Add, edit, complete, filter and delete tasks.</p>
+
+        <form id="todoForm">
+            <label for="todoInput">Task</label>
+            <input id="todoInput" type="text" maxlength="200"
+                   placeholder="What do you need to do?" required>
+            <button type="submit" id="todoSubmit">Add Task</button>
+            <button type="button" class="secondary" id="cancelEdit" hidden>
+                Cancel Edit
+            </button>
+        </form>
+
+        <p id="todoMessage" class="message" role="status" aria-live="polite"></p>
+
+        <div class="stats">
+            <span>Total: <strong id="todoTotal">0</strong></span>
+            <span>Active: <strong id="todoActive">0</strong></span>
+            <span>Completed: <strong id="todoCompleted">0</strong></span>
+        </div>
+
+        <div class="filter-row" role="group" aria-label="Filter tasks">
+            <button type="button" class="filter-button selected"
+                    data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="filter-button"
+                    data-filter="active" aria-pressed="false">Active</button>
+            <button type="button" class="filter-button"
+                    data-filter="completed" aria-pressed="false">Completed</button>
+        </div>
+
+        <ul id="todoList" class="todo-list" aria-label="Task list"></ul>
+
+        <button type="button" class="danger" id="clearCompleted">
+            Delete Completed Tasks
+        </button>
+        <button type="button" class="secondary" id="clearAllTasks">
+            Delete All Tasks
+        </button>
+    </section>
+</main>
+
+<footer>
+    <p>JavaScript Practice | Dynamic UI, Forms & To-Do App</p>
+</footer>
+
+<script>
+    // Assignment 41: Dynamic Reading List
+    const books = [];
+    let nextBookId = 1;
+
+    const bookForm = document.getElementById("bookForm");
+    const bookList = document.getElementById("bookList");
+
+    bookForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const title = document.getElementById("bookTitle").value.trim();
+        const author = document.getElementById("bookAuthor").value.trim();
+
+        if (!title || !author) {
+            document.getElementById("bookMessage").textContent =
+                "Please enter both the book title and author.";
+            return;
+        }
+
+        books.push({
+            id: nextBookId++,
+            title: title,
+            author: author,
+            read: false
+        });
+
+        bookForm.reset();
+        document.getElementById("bookMessage").textContent =
+            "Book added successfully.";
+        renderBooks();
+    });
+
+    function renderBooks() {
+        bookList.replaceChildren();
+
+        if (books.length === 0) {
+            const empty = document.createElement("p");
+            empty.className = "empty";
+            empty.textContent = "Your reading list is empty.";
+            bookList.appendChild(empty);
+        }
+
+        books.forEach(function(book) {
+            const item = document.createElement("article");
+            item.className = "list-item" + (book.read ? " completed" : "");
+
+            const details = document.createElement("div");
+            details.className = "item-details";
+
+            const title = document.createElement("h3");
+            title.textContent = book.title;
+
+            const author = document.createElement("p");
+            author.textContent = "Author: " + book.author;
+
+            const status = document.createElement("span");
+            status.className = "small-status";
+            status.textContent = book.read ? "Read" : "Unread";
+
+            details.append(title, author, status);
+
+            const actions = document.createElement("div");
+            actions.className = "actions";
+
+            const readButton = document.createElement("button");
+            readButton.type = "button";
+            readButton.textContent = book.read ? "Mark Unread" : "Mark Read";
+            readButton.setAttribute("aria-pressed", String(book.read));
+            readButton.addEventListener("click", function() {
+                book.read = !book.read;
+                renderBooks();
+            });
+
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.className = "danger";
+            deleteButton.textContent = "Delete";
+            deleteButton.addEventListener("click", function() {
+                const index = books.findIndex(item => item.id === book.id);
+                if (index !== -1) books.splice(index, 1);
+                renderBooks();
+            });
+
+            actions.append(readButton, deleteButton);
+            item.append(details, actions);
+            bookList.appendChild(item);
+        });
+
+        document.getElementById("bookTotal").textContent = books.length;
+        document.getElementById("bookRead").textContent =
+            books.filter(book => book.read).length;
+        document.getElementById("bookUnread").textContent =
+            books.filter(book => !book.read).length;
+    }
+
+    // Assignment 42: Contact form and submission summary
+    const contactForm = document.getElementById("contactForm");
+    const contactSummary = document.getElementById("contactSummary");
+
+    contactForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("contactName").value.trim();
+        const email = document.getElementById("contactEmail").value.trim();
+        const subject = document.getElementById("contactSubject").value;
+        const message = document.getElementById("contactMessage").value.trim();
+
+        if (name.length < 2 || !email || !subject ||
+            message.length < 10 || !contactForm.checkValidity()) {
+            contactForm.reportValidity();
+            document.getElementById("contactStatus").textContent =
+                "Please correct the form fields before submitting.";
+            return;
+        }
+
+        document.getElementById("summaryName").textContent = name;
+        document.getElementById("summaryEmail").textContent = email;
+        document.getElementById("summarySubject").textContent = subject;
+        document.getElementById("summaryMessage").textContent = message;
+
+        contactSummary.hidden = false;
+        document.getElementById("contactStatus").textContent =
+            "Form submitted successfully. Review your summary below.";
+    });
+
+    contactForm.addEventListener("reset", function() {
+        contactSummary.hidden = true;
+        document.getElementById("contactStatus").textContent =
+            "Form has been reset.";
+    });
+
+    // Assignment 43: Automated validation test matrix
+    document.getElementById("runTests").addEventListener("click", function() {
+        const tests = [
+            {
+                id: "TC01",
+                expected: "Valid form passes checks",
+                pass: () => {
+                    const form = document.getElementById("contactForm");
+                    return form.checkValidity() &&
+                        document.getElementById("contactName").value.trim().length >= 2 &&
+                        document.getElementById("contactMessage").value.trim().length >= 10;
+                }
+            },
+            {
+                id: "TC02",
+                expected: "Empty name is invalid",
+                pass: () => {
+                    const field = document.getElementById("contactName");
+                    return field.required && field.value.trim().length >= 2;
+                }
+            },
+            {
+                id: "TC03",
+                expected: "Email format is valid",
+                pass: () => document.getElementById("contactEmail").validity.valid
+            },
+            {
+                id: "TC04",
+                expected: "Message has at least 10 characters",
+                pass: () => {
+                    const message = document.getElementById("contactMessage");
+                    return message.value.trim().length >= 10;
+                }
+            },
+            {
+                id: "TC05",
+                expected: "A subject is selected",
+                pass: () => document.getElementById("contactSubject").value !== ""
+            },
+            {
+                id: "TC06",
+                expected: "Reset hides the summary",
+                pass: () => contactSummary.hidden
+            }
+        ];
+
+        let passed = 0;
+
+        tests.forEach(function(test) {
+            const row = Array.from(
+                document.querySelectorAll("#testMatrix tr")
+            ).find(tr => tr.cells[0].textContent === test.id);
+
+            let result = false;
+
+            try {
+                result = test.pass();
+            } catch (error) {
+                result = false;
+            }
+
+            if (result) passed++;
+
+            if (row) {
+                row.cells[4].textContent = result
+                    ? "Passed"
+                    : "Needs testing / failed";
+                row.cells[5].textContent = result ? "Pass" : "Fail";
+                row.cells[5].className = result ? "test-pass" : "test-fail";
+            }
+        });
+
+        document.getElementById("testSummary").textContent =
+            passed + " of " + tests.length +
+            " checks passed. For TC01, fill the form with valid data first; " +
+            "for TC06, reset the form before running the checks.";
+    });
+
+    // Assignment 44: To-do application
+    const tasks = [];
+    let nextTaskId = 1;
+    let currentFilter = "all";
+    let editingTaskId = null;
+
+    const todoForm = document.getElementById("todoForm");
+    const todoInput = document.getElementById("todoInput");
+    const todoSubmit = document.getElementById("todoSubmit");
+    const cancelEdit = document.getElementById("cancelEdit");
+    const todoList = document.getElementById("todoList");
+    const todoMessage = document.getElementById("todoMessage");
+
+    todoForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const text = todoInput.value.trim();
+
+        if (!text) {
+            todoMessage.textContent = "Please enter a task.";
+            return;
+        }
+
+        if (editingTaskId !== null) {
+            const task = tasks.find(item => item.id === editingTaskId);
+
+            if (task) task.text = text;
+
+            todoMessage.textContent = "Task updated successfully.";
+            editingTaskId = null;
+            todoSubmit.textContent = "Add Task";
+            cancelEdit.hidden = true;
+        } else {
+            tasks.push({
+                id: nextTaskId++,
+                text: text,
+                completed: false
+            });
+
+            todoMessage.textContent = "Task added successfully.";
+        }
+
+        todoForm.reset();
+        renderTasks();
+    });
+
+    function startEdit(task) {
+        editingTaskId = task.id;
+        todoInput.value = task.text;
+        todoSubmit.textContent = "Save Changes";
+        cancelEdit.hidden = false;
+        todoInput.focus();
+        todoMessage.textContent = "Editing task: " + task.text;
+    }
+
+    cancelEdit.addEventListener("click", function() {
+        editingTaskId = null;
+        todoForm.reset();
+        todoSubmit.textContent = "Add Task";
+        cancelEdit.hidden = true;
+        todoMessage.textContent = "Edit cancelled.";
+    });
+
+    function renderTasks() {
+        todoList.replaceChildren();
+
+        const visibleTasks = tasks.filter(function(task) {
+            if (currentFilter === "active") return !task.completed;
+            if (currentFilter === "completed") return task.completed;
+            return true;
+        });
+
+        if (visibleTasks.length === 0) {
+            const empty = document.createElement("li");
+            empty.className = "empty";
+            empty.textContent = "No tasks to display.";
+            todoList.appendChild(empty);
+        }
+
+        visibleTasks.forEach(function(task) {
+            const item = document.createElement("li");
+            item.className = "todo-item" +
+                (task.completed ? " task-completed" : "");
+
+            const label = document.createElement("label");
+            label.className = "task-label";
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = task.completed;
+            checkbox.setAttribute(
+                "aria-label", "Mark task complete: " + task.text
+            );
+
+            checkbox.addEventListener("change", function() {
+                task.completed = checkbox.checked;
+                renderTasks();
+            });
+
+            const taskText = document.createElement("span");
+            taskText.textContent = task.text;
+
+            label.append(checkbox, taskText);
+
+            const actions = document.createElement("div");
+            actions.className = "actions";
+
+            const editButton = document.createElement("button");
+            editButton.type = "button";
+            editButton.textContent = "Edit";
+            editButton.disabled = task.completed;
+            editButton.addEventListener("click", function() {
+                startEdit(task);
+            });
+
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.className = "danger";
+            deleteButton.textContent = "Delete";
+            deleteButton.addEventListener("click", function() {
+                const index = tasks.findIndex(item => item.id === task.id);
+                if (index !== -1) tasks.splice(index, 1);
+
+                if (editingTaskId === task.id) {
+                    editingTaskId = null;
+                    todoForm.reset();
+                    todoSubmit.textContent = "Add Task";
+                    cancelEdit.hidden = true;
+                }
+
+                renderTasks();
+                todoMessage.textContent = "Task deleted.";
+            });
+
+            actions.append(editButton, deleteButton);
+            item.append(label, actions);
+            todoList.appendChild(item);
+        });
+
+        document.getElementById("todoTotal").textContent = tasks.length;
+        document.getElementById("todoActive").textContent =
+            tasks.filter(task => !task.completed).length;
+        document.getElementById("todoCompleted").textContent =
+            tasks.filter(task => task.completed).length;
+
+        document.querySelectorAll(".filter-button").forEach(function(button) {
+            const selected = button.dataset.filter === currentFilter;
+            button.classList.toggle("selected", selected);
+            button.setAttribute("aria-pressed", String(selected));
+        });
+    }
+
+    document.querySelectorAll(".filter-button").forEach(function(button) {
+        button.addEventListener("click", function() {
+            currentFilter = button.dataset.filter;
+            renderTasks();
+        });
+    });
+
+    document.getElementById("clearCompleted").addEventListener("click", function() {
+        tasks.splice(0, tasks.length, ...tasks.filter(task => !task.completed));
+
+        if (editingTaskId !== null &&
+            !tasks.some(task => task.id === editingTaskId)) {
+            editingTaskId = null;
+            todoForm.reset();
+            todoSubmit.textContent = "Add Task";
+            cancelEdit.hidden = true;
+        }
+
+        renderTasks();
+        todoMessage.textContent = "Completed tasks deleted.";
+    });
+
+    document.getElementById("clearAllTasks").addEventListener("click", function() {
+        tasks.length = 0;
+        editingTaskId = null;
+        todoForm.reset();
+        todoSubmit.textContent = "Add Task";
+        cancelEdit.hidden = true;
+        renderTasks();
+        todoMessage.textContent = "All tasks deleted.";
+    });
+
+    renderBooks();
+    renderTasks();
+</script>
+</body>
+</html>

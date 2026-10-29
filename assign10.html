@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments 37–40 | DOM & Events</title>
+    <link rel="stylesheet" href="assign10.css">
+</head>
+<body>
+    <header>
+        <h1>DOM Manipulation & Events</h1>
+        <p>JavaScript Assignments 37–40</p>
+        <nav aria-label="Assignment navigation">
+            <a href="#a37">Assignment 37</a>
+            <a href="#a38">Assignment 38</a>
+            <a href="#a39">Assignment 39</a>
+            <a href="#a40">Assignment 40</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Assignment 37 -->
+        <section class="card" id="a37">
+            <h2>Assignment 37: Safe Profile Content Updater</h2>
+            <p>Update profile content using textContent instead of unsafe HTML injection.</p>
+
+            <div class="profile-preview">
+                <h3 id="safeName">Ansh Pratap Srivastava</h3>
+                <p id="safeCourse">BCA Artificial Intelligence</p>
+                <p id="safeBio">Welcome to my student profile.</p>
+            </div>
+
+            <form id="safeProfileForm">
+                <label for="safeNameInput">Name</label>
+                <input id="safeNameInput" type="text"
+                       value="Ansh Pratap Srivastava" required maxlength="80">
+
+                <label for="safeCourseInput">Course</label>
+                <input id="safeCourseInput" type="text"
+                       value="BCA Artificial Intelligence" required maxlength="80">
+
+                <label for="safeBioInput">Bio</label>
+                <textarea id="safeBioInput" rows="3" maxlength="250"
+                    required>Welcome to my student profile.</textarea>
+
+                <button type="submit">Update Profile</button>
+            </form>
+
+            <p id="safeMessage" class="status" role="status" aria-live="polite"></p>
+        </section>
+
+        <!-- Assignment 38 -->
+        <section class="card" id="a38">
+            <h2>Assignment 38: Accessible Profile States</h2>
+            <p>Toggle profile states using buttons, visible labels and accessible status announcements.</p>
+
+            <div id="stateProfile" class="profile-preview state-active">
+                <h3>Student Profile</h3>
+                <p id="stateDescription">This profile is currently active.</p>
+                <span id="stateBadge" class="state-badge">Active</span>
+            </div>
+
+            <div class="button-row">
+                <button type="button" id="activeButton" aria-pressed="true">
+                    Set Active
+                </button>
+                <button type="button" id="inactiveButton" aria-pressed="false">
+                    Set Inactive
+                </button>
+                <button type="button" id="favoriteButton" aria-pressed="false">
+                    ☆ Add Favorite
+                </button>
+            </div>
+
+            <p id="stateAnnouncement" class="status" role="status"
+               aria-live="polite">Profile is active. It is not a favorite.</p>
+        </section>
+
+        <!-- Assignment 39 -->
+        <section class="card" id="a39">
+            <h2>Assignment 39: Interactive Profile & Event Map</h2>
+            <p>Submit the form and inspect the event map to see which handlers run.</p>
+
+            <form id="interactiveForm">
+                <label for="eventName">Name</label>
+                <input id="eventName" name="name" type="text"
+                       value="Ansh" required maxlength="80">
+
+                <label for="eventEmail">Email</label>
+                <input id="eventEmail" name="email" type="email"
+                       placeholder="student@example.com" required maxlength="120">
+
+                <label for="eventRole">Role</label>
+                <select id="eventRole" name="role">
+                    <option value="Student">Student</option>
+                    <option value="Developer">Developer</option>
+                    <option value="Designer">Designer</option>
+                </select>
+
+                <button type="submit">Submit Profile</button>
+                <button type="reset" class="secondary">Reset Form</button>
+            </form>
+
+            <div class="profile-preview">
+                <h3>Submitted Profile</h3>
+                <p><strong>Name:</strong> <span id="submittedName">Not submitted</span></p>
+                <p><strong>Email:</strong> <span id="submittedEmail">Not submitted</span></p>
+                <p><strong>Role:</strong> <span id="submittedRole">Not submitted</span></p>
+            </div>
+
+            <h3>Event Map</h3>
+            <p>Each event below is recorded when its handler runs.</p>
+            <ol id="eventLog" class="event-log" aria-live="polite">
+                <li>No events recorded yet.</li>
+            </ol>
+            <button type="button" class="secondary" id="clearEventLog">
+                Clear Event Log
+            </button>
+        </section>
+
+        <!-- Assignment 40 -->
+        <section class="card" id="a40">
+            <h2>Assignment 40: Reusable Card Renderer</h2>
+            <p>Render reusable cards from JavaScript objects using safe DOM methods.</p>
+
+            <form id="cardForm">
+                <label for="cardTitle">Card Title</label>
+                <input id="cardTitle" type="text" maxlength="80"
+                       placeholder="Enter a title" required>
+
+                <label for="cardDescription">Description</label>
+                <textarea id="cardDescription" rows="3" maxlength="250"
+                    placeholder="Enter a description" required></textarea>
+
+                <label for="cardCategory">Category</label>
+                <select id="cardCategory">
+                    <option value="Education">Education</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Personal">Personal</option>
+                </select>
+
+                <button type="submit">Create Card</button>
+            </form>
+
+            <p id="cardMessage" class="status" role="status" aria-live="polite"></p>
+
+            <div id="cardContainer" class="card-grid" aria-label="Generated cards">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>JavaScript Practice | DOM Manipulation & Events</p>
+    </footer>
+
+    <script>
+        // Assignment 37: Update profile safely using textContent
+        const safeProfileForm = document.getElementById("safeProfileForm");
+
+        safeProfileForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("safeNameInput").value.trim();
+            const course = document.getElementById("safeCourseInput").value.trim();
+            const bio = document.getElementById("safeBioInput").value.trim();
+
+            if (!name || !course || !bio) {
+                document.getElementById("safeMessage").textContent =
+                    "Please complete all profile fields.";
+                return;
+            }
+
+            document.getElementById("safeName").textContent = name;
+            document.getElementById("safeCourse").textContent = course;
+            document.getElementById("safeBio").textContent = bio;
+
+            document.getElementById("safeMessage").textContent =
+                "Profile updated successfully.";
+        });
+
+        // Assignment 38: Accessible state classes and ARIA states
+        const stateProfile = document.getElementById("stateProfile");
+        const stateBadge = document.getElementById("stateBadge");
+        const stateDescription = document.getElementById("stateDescription");
+        const stateAnnouncement = document.getElementById("stateAnnouncement");
+        const activeButton = document.getElementById("activeButton");
+        const inactiveButton = document.getElementById("inactiveButton");
+        const favoriteButton = document.getElementById("favoriteButton");
+
+        let isActive = true;
+        let isFavorite = false;
+
+        function updateProfileState() {
+            stateProfile.classList.toggle("state-active", isActive);
+            stateProfile.classList.toggle("state-inactive", !isActive);
+            stateProfile.classList.toggle("state-favorite", isFavorite);
+
+            stateBadge.textContent = isActive ? "Active" : "Inactive";
+            stateDescription.textContent = isActive
+                ? "This profile is currently active."
+                : "This profile is currently inactive.";
+
+            activeButton.setAttribute("aria-pressed", String(isActive));
+            inactiveButton.setAttribute("aria-pressed", String(!isActive));
+            favoriteButton.setAttribute("aria-pressed", String(isFavorite));
+            favoriteButton.textContent = isFavorite
+                ? "★ Remove Favorite"
+                : "☆ Add Favorite";
+
+            stateAnnouncement.textContent =
+                "Profile is " + (isActive ? "active" : "inactive") +
+                (isFavorite ? " and marked as a favorite." : " and is not a favorite.");
+        }
+
+        activeButton.addEventListener("click", function() {
+            isActive = true;
+            updateProfileState();
+        });
+
+        inactiveButton.addEventListener("click", function() {
+            isActive = false;
+            updateProfileState();
+        });
+
+        favoriteButton.addEventListener("click", function() {
+            isFavorite = !isFavorite;
+            updateProfileState();
+        });
+
+        // Assignment 39: Form events and event map
+        const interactiveForm = document.getElementById("interactiveForm");
+        const eventLog = document.getElementById("eventLog");
+        let eventCount = 0;
+
+        function recordEvent(eventName, details) {
+            if (eventCount === 0) {
+                eventLog.replaceChildren();
+            }
+
+            eventCount++;
+
+            const item = document.createElement("li");
+            item.textContent =
+                eventCount + ". " + eventName +
+                (details ? " — " + details : "");
+
+            eventLog.appendChild(item);
+        }
+
+        ["eventName", "eventEmail", "eventRole"].forEach(function(id) {
+            const field = document.getElementById(id);
+
+            field.addEventListener("change", function() {
+                recordEvent("change", field.name + " changed");
+            });
+
+            field.addEventListener("input", function() {
+                recordEvent("input", field.name + " edited");
+            });
+        });
+
+        interactiveForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("eventName").value.trim();
+            const email = document.getElementById("eventEmail").value.trim();
+            const role = document.getElementById("eventRole").value;
+
+            if (!name || !email) {
+                recordEvent("submit", "Required fields are missing");
+                return;
+            }
+
+            document.getElementById("submittedName").textContent = name;
+            document.getElementById("submittedEmail").textContent = email;
+            document.getElementById("submittedRole").textContent = role;
+
+            recordEvent("submit", "Profile submitted successfully");
+        });
+
+        interactiveForm.addEventListener("reset", function() {
+            recordEvent("reset", "Form reset requested");
+
+            document.getElementById("submittedName").textContent = "Not submitted";
+            document.getElementById("submittedEmail").textContent = "Not submitted";
+            document.getElementById("submittedRole").textContent = "Not submitted";
+        });
+
+        document.getElementById("clearEventLog").addEventListener("click", function() {
+            eventCount = 0;
+            eventLog.replaceChildren();
+
+            const item = document.createElement("li");
+            item.textContent = "Event log cleared.";
+            eventLog.appendChild(item);
+        });
+
+        // Assignment 40: Reusable card-rendering function
+        let nextCardId = 1;
+
+        function createCard(cardData) {
+            const article = document.createElement("article");
+            article.className = "generated-card";
+
+            const heading = document.createElement("h3");
+            heading.textContent = cardData.title;
+
+            const description = document.createElement("p");
+            description.textContent = cardData.description;
+
+            const category = document.createElement("span");
+            category.className = "category-tag";
+            category.textContent = cardData.category;
+
+            const removeButton = document.createElement("button");
+            removeButton.type = "button";
+            removeButton.className = "danger";
+            removeButton.textContent = "Remove Card";
+            removeButton.setAttribute(
+                "aria-label", "Remove card: " + cardData.title
+            );
+
+            removeButton.addEventListener("click", function() {
+                article.remove();
+            });
+
+            article.append(heading, description, category, removeButton);
+            return article;
+        }
+
+        const cardForm = document.getElementById("cardForm");
+        const cardContainer = document.getElementById("cardContainer");
+
+        cardForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById("cardTitle").value.trim();
+            const description =
+                document.getElementById("cardDescription").value.trim();
+            const category = document.getElementById("cardCategory").value;
+
+            if (!title || !description) {
+                document.getElementById("cardMessage").textContent =
+                    "Please enter both title and description.";
+                return;
+            }
+
+            const cardData = {
+                id: nextCardId++,
+                title: title,
+                description: description,
+                category: category
+            };
+
+            cardContainer.appendChild(createCard(cardData));
+            document.getElementById("cardMessage").textContent =
+                "Card created successfully.";
+
+            cardForm.reset();
+        });
+    </script>
+</body>
+</html>

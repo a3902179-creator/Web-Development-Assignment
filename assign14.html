@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Productivity Dashboard with task management, release testing and bug tracking.">
+    <title>Student Productivity Dashboard | Release Candidate</title>
+    <link rel="stylesheet" href="assign14.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <div>
+                <p class="eyebrow">CAPSTONE PROJECT · VERSION 1.0.0-RC1</p>
+                <h1>Student Productivity Dashboard</h1>
+                <p>Manage tasks, test features and track release quality.</p>
+            </div>
+            <button id="themeToggle" class="secondary-btn" type="button"
+                    aria-pressed="false">Switch Theme</button>
+        </div>
+    </header>
+
+    <nav class="main-nav" aria-label="Main navigation">
+        <div class="container nav-links">
+            <a href="#dashboard">Dashboard</a>
+            <a href="#features">Features</a>
+            <a href="#testing">Test Matrix</a>
+            <a href="#bugs">Bug Log</a>
+            <a href="#release">Release Decision</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- ASSIGNMENT 55: WORKING RELEASE CANDIDATE -->
+        <section id="dashboard" class="panel">
+            <h2>Task Dashboard</h2>
+            <p>Add tasks, update them and track your daily progress.</p>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span>Total Tasks</span>
+                    <strong id="totalCount">0</strong>
+                </article>
+                <article class="stat-card">
+                    <span>Pending</span>
+                    <strong id="pendingCount">0</strong>
+                </article>
+                <article class="stat-card">
+                    <span>Completed</span>
+                    <strong id="completedCount">0</strong>
+                </article>
+            </div>
+
+            <form id="taskForm">
+                <label for="taskTitle">Task title</label>
+                <input id="taskTitle" type="text" maxlength="120"
+                       placeholder="e.g. Complete HTML assignment" required>
+
+                <label for="taskDescription">Description (optional)</label>
+                <textarea id="taskDescription" rows="3" maxlength="500"
+                          placeholder="Add some details"></textarea>
+
+                <div class="button-row">
+                    <button id="saveTaskBtn" type="submit">Add Task</button>
+                    <button id="cancelEditBtn" class="secondary-btn"
+                            type="button" hidden>Cancel Edit</button>
+                </div>
+            </form>
+
+            <p id="taskMessage" class="message" role="status" aria-live="polite"></p>
+
+            <div class="filter-row">
+                <label for="taskFilter">Filter tasks</label>
+                <select id="taskFilter">
+                    <option value="all">All tasks</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+
+            <ul id="taskList" class="task-list" aria-label="Your tasks"></ul>
+            <p id="emptyMessage" class="empty-message">No tasks yet. Add your first task!</p>
+        </section>
+
+        <!-- FEATURE CHECKLIST -->
+        <section id="features" class="panel">
+            <h2>Feature Checklist</h2>
+            <p>Check features only after manually verifying them.</p>
+
+            <div class="check-list">
+                <label><input type="checkbox" class="feature-check"> Add a task</label>
+                <label><input type="checkbox" class="feature-check"> Edit a task</label>
+                <label><input type="checkbox" class="feature-check"> Delete a task</label>
+                <label><input type="checkbox" class="feature-check"> Mark a task completed</label>
+                <label><input type="checkbox" class="feature-check"> Filter tasks by status</label>
+                <label><input type="checkbox" class="feature-check"> Save tasks after refresh</label>
+                <label><input type="checkbox" class="feature-check"> Persist theme preference</label>
+                <label><input type="checkbox" class="feature-check"> Responsive mobile layout</label>
+            </div>
+            <p id="featureProgress" class="message" role="status">0 of 8 features verified.</p>
+        </section>
+
+        <!-- ASSIGNMENT 56: TEST MATRIX -->
+        <section id="testing" class="panel">
+            <h2>Test Matrix</h2>
+            <p>Run each test, enter the actual result and record its status.</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Test ID</th>
+                            <th>Test Case</th>
+                            <th>Expected Result</th>
+                            <th>Actual Result</th>
+                            <th>Status</th>
+                            <th>Fix / Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="testMatrixBody">
+                        <tr>
+                            <td>T01</td>
+                            <td>Add a valid task</td>
+                            <td>Task appears in list</td>
+                            <td><input class="test-actual" aria-label="T01 actual result"
+                                placeholder="Record result"></td>
+                            <td><select class="test-status" aria-label="T01 status">
+                                <option value="Not tested">Not tested</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                            </select></td>
+                            <td><input class="test-notes" aria-label="T01 fix or notes"
+                                placeholder="Fix or notes"></td>
+                        </tr>
+                        <tr>
+                            <td>T02</td>
+                            <td>Reload the page</td>
+                            <td>Saved tasks remain visible</td>
+                            <td><input class="test-actual" aria-label="T02 actual result"
+                                placeholder="Record result"></td>
+                            <td><select class="test-status" aria-label="T02 status">
+                                <option value="Not tested">Not tested</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                            </select></td>
+                            <td><input class="test-notes" aria-label="T02 fix or notes"
+                                placeholder="Fix or notes"></td>
+                        </tr>
+                        <tr>
+                            <td>T03</td>
+                            <td>Submit blank task</td>
+                            <td>Validation prevents blank task</td>
+                            <td><input class="test-actual" aria-label="T03 actual result"
+                                placeholder="Record result"></td>
+                            <td><select class="test-status" aria-label="T03 status">
+                                <option value="Not tested">Not tested</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                            </select></td>
+                            <td><input class="test-notes" aria-label="T03 fix or notes"
+                                placeholder="Fix or notes"></td>
+                        </tr>
+                        <tr>
+                            <td>T04</td>
+                            <td>Filter completed tasks</td>
+                            <td>Only completed tasks appear</td>
+                            <td><input class="test-actual" aria-label="T04 actual result"
+                                placeholder="Record result"></td>
+                            <td><select class="test-status" aria-label="T04 status">
+                                <option value="Not tested">Not tested</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                            </select></td>
+                            <td><input class="test-notes" aria-label="T04 fix or notes"
+                                placeholder="Fix or notes"></td>
+                        </tr>
+                        <tr>
+                            <td>T05</td>
+                            <td>Switch theme and reload</td>
+                            <td>Selected theme persists</td>
+                            <td><input class="test-actual" aria-label="T05 actual result"
+                                placeholder="Record result"></td>
+                            <td><select class="test-status" aria-label="T05 status">
+                                <option value="Not tested">Not tested</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                            </select></td>
+                            <td><input class="test-notes" aria-label="T05 fix or notes"
+                                placeholder="Fix or notes"></td>
+                        </tr>
+                        <tr>
+                            <td>T06</td>
+                            <td>Mobile viewport</td>
+                            <td>Content fits available width</td>
+                            <td><input class="test-actual" aria-label="T06 actual result"
+                                placeholder="Record result"></td>
+                            <td><select class="test-status" aria-label="T06 status">
+                                <option value="Not tested">Not tested</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                            </select></td>
+                            <td><input class="test-notes" aria-label="T06 fix or notes"
+                                placeholder="Fix or notes"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-row">
+                <button id="saveTestsBtn" type="button">Save Test Results</button>
+                <button id="exportTestsBtn" type="button" class="secondary-btn">
+                    Download Test Matrix
+                </button>
+            </div>
+            <p id="testMessage" class="message" role="status" aria-live="polite"></p>
+        </section>
+
+        <!-- ASSIGNMENT 57: BUG LOG -->
+        <section id="bugs" class="panel">
+            <h2>Bug Log</h2>
+            <p>Record actual issues, root causes, fixes and verification evidence.</p>
+
+            <form id="bugForm">
+                <label for="bugIssue">Issue</label>
+                <input id="bugIssue" required maxlength="200"
+                       placeholder="Describe the observed issue">
+
+                <label for="bugCause">Root cause</label>
+                <textarea id="bugCause" required maxlength="500"
+                          placeholder="Why did the issue occur?"></textarea>
+
+                <label for="bugFix">Fix applied</label>
+                <textarea id="bugFix" required maxlength="500"
+                          placeholder="Describe the fix"></textarea>
+
+                <label for="bugVerification">Verification result</label>
+                <textarea id="bugVerification" required maxlength="500"
+                          placeholder="How did you retest it?"></textarea>
+
+                <button type="submit">Add Bug Record</button>
+            </form>
+
+            <p id="bugMessage" class="message" role="status" aria-live="polite"></p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bug ID</th>
+                            <th>Issue</th>
+                            <th>Cause</th>
+                            <th>Fix</th>
+                            <th>Verification</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bugTableBody"></tbody>
+                </table>
+            </div>
+            <p id="noBugsMessage" class="empty-message">
+                No bug records yet. Add an observed issue above.
+            </p>
+        </section>
+
+        <!-- ASSIGNMENT 58: HTML/CSS REVISION -->
+        <section class="panel">
+            <h2>HTML & CSS Revision Checklist</h2>
+            <ul class="revision-list">
+                <li>Semantic elements: header, nav, main, section and footer</li>
+                <li>Accessible form labels and descriptive button text</li>
+                <li>Responsive layout using flexible widths and media queries</li>
+                <li>Visible keyboard focus and readable contrast</li>
+                <li>Tables contained within horizontally scrollable wrappers</li>
+                <li>JavaScript separated from presentation styles</li>
+            </ul>
+        </section>
+
+        <!-- RELEASE DECISION -->
+        <section id="release" class="panel">
+            <h2>Release Decision</h2>
+            <p>
+                Approve the release only after required tests pass, bugs are
+                verified, and the features have been manually checked.
+            </p>
+            <p id="releaseStatus" class="release-label">Release status: Pending verification</p>
+            <p id="releaseDetails" class="message" role="status">
+                Complete the test matrix and feature checklist to review readiness.
+            </p>
+            <button id="checkReleaseBtn" type="button">Check Release Readiness</button>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Student Productivity Dashboard · Release Candidate · 1.0.0-rc1</p>
+        </div>
+    </footer>
+
+    <script>
+        // Storage helper: handle unavailable or blocked local storage.
+        function readStorage(key, fallback) {
+            try {
+                const value = localStorage.getItem(key);
+                return value === null ? fallback : JSON.parse(value);
+            } catch (error) {
+                return fallback;
+            }
+        }
+
+        function writeStorage(key, value) {
+            try {
+                localStorage.setItem(key, JSON.stringify(value));
+                return true;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        // ASSIGNMENT 55: Task dashboard
+        let tasks = readStorage("studentDashboardTasks", []);
+        if (!Array.isArray(tasks)) tasks = [];
+
+        let editingId = null;
+
+        const taskForm = document.getElementById("taskForm");
+        const taskTitle = document.getElementById("taskTitle");
+        const taskDescription = document.getElementById("taskDescription");
+        const taskList = document.getElementById("taskList");
+        const taskFilter = document.getElementById("taskFilter");
+        const taskMessage = document.getElementById("taskMessage");
+
+        function saveTasks() {
+            const saved = writeStorage("studentDashboardTasks", tasks);
+            if (!saved) {
+                taskMessage.textContent =
+                    "Warning: browser storage is unavailable. Changes may not persist.";
+            }
+            return saved;
+        }
+
+        function updateStats() {
+            document.getElementById("totalCount").textContent = tasks.length;
+            document.getElementById("completedCount").textContent =
+                tasks.filter(task => task.completed).length;
+            document.getElementById("pendingCount").textContent =
+                tasks.filter(task => !task.completed).length;
+        }
+
+        function createActionButton(text, className, action, label) {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.textContent = text;
+            button.className = className;
+            button.setAttribute("aria-label", label);
+            button.addEventListener("click", action);
+            return button;
+        }
+
+        function renderTasks() {
+            taskList.replaceChildren();
+
+            const filter = taskFilter.value;
+            const visibleTasks = tasks.filter(task => {
+                if (filter === "pending") return !task.completed;
+                if (filter === "completed") return task.completed;
+                return true;
+            });
+
+            document.getElementById("emptyMessage").hidden =
+                visibleTasks.length !== 0;
+
+            visibleTasks.forEach(task => {
+                const item = document.createElement("li");
+                item.className = "task-item";
+
+                const content = document.createElement("div");
+                content.className = "task-content";
+
+                const title = document.createElement("h3");
+                title.textContent = task.title;
+                if (task.completed) title.classList.add("completed-task");
+
+                const description = document.createElement("p");
+                description.textContent = task.description || "No description provided.";
+
+                const status = document.createElement("span");
+                status.className = task.completed ? "tag complete-tag" : "tag pending-tag";
+                status.textContent = task.completed ? "Completed" : "Pending";
+
+                content.append(title, description, status);
+
+                const actions = document.createElement("div");
+                actions.className = "task-actions";
+
+                actions.appendChild(createActionButton(
+                    task.completed ? "Undo" : "Complete",
+                    "small-btn",
+                    () => {
+                        task.completed = !task.completed;
+                        saveTasks();
+                        renderTasks();
+                    },
+                    (task.completed ? "Mark pending: " : "Complete: ") + task.title
+                ));
+
+                actions.appendChild(createActionButton(
+                    "Edit", "secondary-btn small-btn",
+                    () => {
+                        editingId = task.id;
+                        taskTitle.value = task.title;
+                        taskDescription.value = task.description;
+                        document.getElementById("saveTaskBtn").textContent = "Save Changes";
+                        document.getElementById("cancelEditBtn").hidden = false;
+                        taskTitle.focus();
+                    },
+                    "Edit " + task.title
+                ));
+
+                actions.appendChild(createActionButton(
+                    "Delete", "danger-btn small-btn",
+                    () => {
+                        if (!confirm("Delete this task?")) return;
+                        tasks = tasks.filter(entry => entry.id !== task.id);
+                        if (editingId === task.id) resetTaskForm();
+                        saveTasks();
+                        renderTasks();
+                        taskMessage.textContent = "Task deleted.";
+                    },
+                    "Delete " + task.title
+                ));
+
+                item.append(content, actions);
+                taskList.appendChild(item);
+            });
+
+            updateStats();
+        }
+
+        function resetTaskForm() {
+            editingId = null;
+            taskForm.reset();
+            document.getElementById("saveTaskBtn").textContent = "Add Task";
+            document.getElementById("cancelEditBtn").hidden = true;
+        }
+
+        taskForm.addEventListener("submit", event => {
+            event.preventDefault();
+
+            const title = taskTitle.value.trim();
+            const description = taskDescription.value.trim();
+
+            if (!title) {
+                taskMessage.textContent = "Please enter a task title.";
+                taskTitle.focus();
+                return;
+            }
+
+            if (editingId !== null) {
+                const task = tasks.find(entry => entry.id === editingId);
+                if (!task) {
+                    taskMessage.textContent = "Task not found. Please try again.";
+                    resetTaskForm();
+                    return;
+                }
+                task.title = title;
+                task.description = description;
+                taskMessage.textContent = "Task updated.";
+            } else {
+                tasks.push({
+                    id: Date.now().toString() + Math.random().toString(16).slice(2),
+                    title,
+                    description,
+                    completed: false
+                });
+                taskMessage.textContent = "Task added successfully.";
+            }
+
+            saveTasks();
+            resetTaskForm();
+            renderTasks();
+        });
+
+        document.getElementById("cancelEditBtn").addEventListener("click", () => {
+            resetTaskForm();
+            taskMessage.textContent = "Edit cancelled.";
+        });
+
+        taskFilter.addEventListener("change", renderTasks);
+
+        // Persist theme preference.
+        const themeToggle = document.getElementById("themeToggle");
+
+        function applyTheme(theme) {
+            document.body.classList.toggle("dark-theme", theme === "dark");
+            themeToggle.textContent = theme === "dark" ? "Switch to Light Theme" : "Switch to Dark Theme";
+            themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
+        }
+
+        let savedTheme = "light";
+        try {
+            savedTheme = localStorage.getItem("studentDashboardTheme") || "light";
+        } catch (error) {}
+
+        applyTheme(savedTheme);
+
+        themeToggle.addEventListener("click", () => {
+            const nextTheme = document.body.classList.contains("dark-theme") ? "light" : "dark";
+            applyTheme(nextTheme);
+            try {
+                localStorage.setItem("studentDashboardTheme", nextTheme);
+            } catch (error) {}
+        });
+
+        // Feature checklist persistence.
+        const featureChecks = [...document.querySelectorAll(".feature-check")];
+
+        function updateFeatureProgress() {
+            const count = featureChecks.filter(check => check.checked).length;
+            document.getElementById("featureProgress").textContent =
+                count + " of " + featureChecks.length + " features verified.";
+        }
+
+        const savedFeatures = readStorage("studentDashboardFeatures", []);
+        featureChecks.forEach((check, index) => {
+            check.checked = Boolean(savedFeatures[index]);
+            check.addEventListener("change", () => {
+                writeStorage("studentDashboardFeatures", featureChecks.map(item => item.checked));
+                updateFeatureProgress();
+            });
+        });
+        updateFeatureProgress();
+
+        // ASSIGNMENT 56: Test matrix persistence and export.
+        const testRows = [...document.querySelectorAll("#testMatrixBody tr")];
+
+        function collectTests() {
+            return testRows.map(row => ({
+                id: row.cells[0].textContent.trim(),
+                test: row.cells[1].textContent.trim(),
+                expected: row.cells[2].textContent.trim(),
+                actual: row.querySelector(".test-actual").value.trim(),
+                status: row.querySelector(".test-status").value,
+                notes: row.querySelector(".test-notes").value.trim()
+            }));
+        }
+
+        const savedTests = readStorage("studentDashboardTests", []);
+        testRows.forEach(row => {
+            const id = row.cells[0].textContent.trim();
+            const saved = savedTests.find(test => test.id === id);
+            if (!saved) return;
+            row.querySelector(".test-actual").value = saved.actual || "";
+            row.querySelector(".test-status").value = saved.status || "Not tested";
+            row.querySelector(".test-notes").value = saved.notes || "";
+        });
+
+        document.getElementById("saveTestsBtn").addEventListener("click", () => {
+            const saved = writeStorage("studentDashboardTests", collectTests());
+            document.getElementById("testMessage").textContent = saved
+                ? "Test matrix saved in this browser."
+                : "Unable to save test results. Check browser storage settings.";
+        });
+
+        function downloadText(filename, text) {
+            const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const anchor = document.createElement("a");
+            anchor.href = url;
+            anchor.download = filename;
+            anchor.click();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+
+        document.getElementById("exportTestsBtn").addEventListener("click", () => {
+            const tests = collectTests();
+            const lines = [
+                "TEST MATRIX",
+                "",
+                ...tests.map(test =>
+                    `${test.id} - ${test.test}\nExpected: ${test.expected}\nActual: ${test.actual || "Not recorded"}\nStatus: ${test.status}\nFix/Notes: ${test.notes || "None recorded"}\n`
+                )
+            ];
+            downloadText("test-matrix.txt", lines.join("\n"));
+        });
+
+        // ASSIGNMENT 57: Bug log. Records are saved locally.
+        let bugs = readStorage("studentDashboardBugs", []);
+        if (!Array.isArray(bugs)) bugs = [];
+
+        const bugForm = document.getElementById("bugForm");
+
+        function renderBugs() {
+            const body = document.getElementById("bugTableBody");
+            body.replaceChildren();
+
+            document.getElementById("noBugsMessage").hidden = bugs.length > 0;
+
+            bugs.forEach(bug => {
+                const row = document.createElement("tr");
+
+                [bug.id, bug.issue, bug.cause, bug.fix, bug.verification].forEach(value => {
+                    const cell = document.createElement("td");
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+
+                const actionCell = document.createElement("td");
+                actionCell.appendChild(createActionButton(
+                    "Delete", "danger-btn small-btn",
+                    () => {
+                        bugs = bugs.filter(entry => entry.id !== bug.id);
+                        writeStorage("studentDashboardBugs", bugs);
+                        renderBugs();
+                    },
+                    "Delete bug " + bug.id
+                ));
+                row.appendChild(actionCell);
+                body.appendChild(row);
+            });
+        }
+
+        bugForm.addEventListener("submit", event => {
+            event.preventDefault();
+
+            const issue = document.getElementById("bugIssue").value.trim();
+            const cause = document.getElementById("bugCause").value.trim();
+            const fix = document.getElementById("bugFix").value.trim();
+            const verification = document.getElementById("bugVerification").value.trim();
+
+            bugs.push({
+                id: "B" + String(Date.now()).slice(-6),
+                issue,
+                cause,
+                fix,
+                verification
+            });
+
+            const saved = writeStorage("studentDashboardBugs", bugs);
+            renderBugs();
+            bugForm.reset();
+            document.getElementById("bugMessage").textContent = saved
+                ? "Bug record added and saved."
+                : "Bug record added for this session, but storage failed.";
+        });
+
+        // Release readiness is an aid, not an automatic guarantee of quality.
+        document.getElementById("checkReleaseBtn").addEventListener("click", () => {
+            const featuresComplete = featureChecks.every(check => check.checked);
+            const tests = collectTests();
+            const testsComplete = tests.every(test =>
+                test.status === "Pass" && test.actual.length > 0
+            );
+
+            const status = document.getElementById("releaseStatus");
+            const details = document.getElementById("releaseDetails");
+
+            if (featuresComplete && testsComplete) {
+                status.textContent = "Release status: Ready for final review";
+                details.textContent =
+                    "All feature checks are marked verified and all recorded tests pass. Perform a final manual review before approval.";
+            } else {
+                status.textContent = "Release status: Pending verification";
+                details.textContent =
+                    "Verify all features and record an actual result with Pass status for every test. Failed or untested cases must be fixed and retested.";
+            }
+        });
+
+        // Initial page render.
+        renderTasks();
+        renderBugs();
+    </script>
+</body>
+</html>

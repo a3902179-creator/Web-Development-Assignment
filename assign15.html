@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Assessment & Reflection</title>
+    <link rel="stylesheet" href="assign15.css">
+</head>
+<body>
+
+    <header class="hero">
+        <p>WEB DEVELOPMENT · FINAL ASSESSMENT</p>
+        <h1>Assessment & Reflection Portal</h1>
+        <p>Assignments 59, 60, 61 and 62</p>
+    </header>
+
+    <main class="container">
+
+        <!-- ASSIGNMENT 59 -->
+        <section class="card">
+            <h2>Assignment 59: Solutions, Dry Runs & Test Cases</h2>
+            <p>Check whether a number is even or odd.</p>
+
+            <label for="number">Enter an integer:</label>
+            <input type="number" id="number" placeholder="Enter a number">
+
+            <button onclick="testNumber()">Run Test</button>
+
+            <h3>Result</h3>
+            <p id="result">Your result will appear here.</p>
+
+            <h3>Dry Run</h3>
+            <pre id="dryRun">Enter a number to see the dry run.</pre>
+
+            <h3>Test Cases</h3>
+            <table>
+                <tr>
+                    <th>Input</th>
+                    <th>Expected Output</th>
+                </tr>
+                <tr><td>4</td><td>Even</td></tr>
+                <tr><td>7</td><td>Odd</td></tr>
+                <tr><td>0</td><td>Even</td></tr>
+            </table>
+        </section>
+
+        <!-- ASSIGNMENT 60 -->
+        <section class="card">
+            <h2>Assignment 60: Working Challenge</h2>
+            <p>Calculate task completion progress.</p>
+
+            <label for="total">Total Tasks:</label>
+            <input type="number" id="total" min="1" placeholder="Total tasks">
+
+            <label for="completed">Completed Tasks:</label>
+            <input type="number" id="completed" min="0"
+                   placeholder="Completed tasks">
+
+            <button onclick="calculateProgress()">Calculate Progress</button>
+
+            <h3 id="percentage">0%</h3>
+
+            <div class="progress-track">
+                <div id="progressBar"></div>
+            </div>
+
+            <p id="progressMessage">Enter task details to begin.</p>
+
+            <h3>Architecture Explanation</h3>
+            <ul>
+                <li>HTML creates the structure and input fields.</li>
+                <li>CSS styles the interface and progress bar.</li>
+                <li>JavaScript validates input and calculates progress.</li>
+                <li>The result is displayed dynamically on the webpage.</li>
+            </ul>
+        </section>
+
+        <!-- ASSIGNMENT 61 -->
+        <section class="card">
+            <h2>Assignment 61: Assessment Repository</h2>
+            <p>Prepare and verify your GitHub repository checklist.</p>
+
+            <label for="student">Student Name:</label>
+            <input type="text" id="student" placeholder="Enter your name">
+
+            <label for="repository">GitHub Repository URL:</label>
+            <input type="url" id="repository"
+                   placeholder="https://github.com/username/repository">
+
+            <h3>Submission Checklist</h3>
+
+            <label class="check">
+                <input type="checkbox" id="htmlCheck"> HTML files added
+            </label>
+
+            <label class="check">
+                <input type="checkbox" id="cssCheck"> CSS files added
+            </label>
+
+            <label class="check">
+                <input type="checkbox" id="jsCheck"> JavaScript tested
+            </label>
+
+            <label class="check">
+                <input type="checkbox" id="readmeCheck"> README updated
+            </label>
+
+            <label class="check">
+                <input type="checkbox" id="testCheck"> Test cases checked
+            </label>
+
+            <button onclick="checkRepository()">Check Submission</button>
+
+            <p id="repositoryMessage">Complete the checklist before submission.</p>
+
+            <a id="repositoryLink" href="#" target="_blank"
+               rel="noopener noreferrer" hidden>
+                Open GitHub Repository
+            </a>
+        </section>
+
+        <!-- ASSIGNMENT 62 -->
+        <section class="card">
+            <h2>Assignment 62: Reflection & Portfolio</h2>
+            <p>Submit your learning reflection and improvement plan.</p>
+
+            <form id="reflectionForm">
+
+                <label for="learning">What did you learn?</label>
+                <textarea id="learning" required
+                    placeholder="Describe your learning"></textarea>
+
+                <label for="challenge">Challenges Faced:</label>
+                <textarea id="challenge" required
+                    placeholder="Describe the challenges"></textarea>
+
+                <label for="feedback">Feedback Received:</label>
+                <textarea id="feedback" required
+                    placeholder="Enter feedback"></textarea>
+
+                <label for="actions">Actions for Improvement:</label>
+                <textarea id="actions" required
+                    placeholder="Write your improvement plan"></textarea>
+
+                <label for="portfolio">Updated Portfolio URL:</label>
+                <input type="url" id="portfolio" required
+                    placeholder="https://your-portfolio.example.com">
+
+                <button type="submit">Submit Reflection</button>
+            </form>
+
+            <div id="reflectionOutput" hidden>
+                <h3>Reflection Summary</h3>
+                <div id="summary"></div>
+                <button type="button" onclick="downloadReflection()">
+                    Download Reflection
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Final Assessment & Reflection | Web Development</p>
+    </footer>
+
+    <script>
+        // ASSIGNMENT 59: Solution, dry run and test cases
+        function testNumber() {
+            const input = document.getElementById("number").value;
+            const result = document.getElementById("result");
+            const dryRun = document.getElementById("dryRun");
+
+            if (input.trim() === "" ||
+                !Number.isSafeInteger(Number(input))) {
+                result.textContent = "Please enter a valid integer.";
+                dryRun.textContent = "No dry run available.";
+                return;
+            }
+
+            const n = Number(input);
+            const remainder = n % 2;
+            const answer = remainder === 0 ? "Even" : "Odd";
+
+            result.textContent = n + " is " + answer + ".";
+
+            dryRun.textContent =
+                "Step 1: Input = " + n +
+                "\nStep 2: " + n + " % 2 = " + remainder +
+                "\nStep 3: Check whether remainder is 0." +
+                "\nStep 4: Output = " + answer;
+        }
+
+        // ASSIGNMENT 60: Task progress calculator
+        function calculateProgress() {
+            const totalInput = document.getElementById("total").value;
+            const completedInput = document.getElementById("completed").value;
+            const total = Number(totalInput);
+            const completed = Number(completedInput);
+
+            const percentage = document.getElementById("percentage");
+            const bar = document.getElementById("progressBar");
+            const message = document.getElementById("progressMessage");
+
+            if (
+                totalInput.trim() === "" ||
+                completedInput.trim() === "" ||
+                !Number.isInteger(total) ||
+                !Number.isInteger(completed) ||
+                total <= 0 ||
+                completed < 0 ||
+                completed > total
+            ) {
+                percentage.textContent = "—";
+                bar.style.width = "0%";
+                message.textContent = "Enter valid task counts.";
+                return;
+            }
+
+            const progress = (completed / total) * 100;
+
+            percentage.textContent = progress.toFixed(1) + "%";
+            bar.style.width = progress + "%";
+            message.textContent =
+                completed + " out of " + total + " tasks completed.";
+        }
+
+        // ASSIGNMENT 61: Repository submission checklist
+        function checkRepository() {
+            const name = document.getElementById("student").value.trim();
+            const url = document.getElementById("repository").value.trim();
+            const message = document.getElementById("repositoryMessage");
+            const link = document.getElementById("repositoryLink");
+
+            link.hidden = true;
+
+            if (!name) {
+                message.textContent = "Please enter your student name.";
+                return;
+            }
+
+            let valid = false;
+
+            try {
+                const parsed = new URL(url);
+                valid = parsed.protocol === "https:" &&
+                    parsed.hostname === "github.com" &&
+                    parsed.pathname.split("/").filter(Boolean).length >= 2;
+            } catch (error) {
+                valid = false;
+            }
+
+            if (!valid) {
+                message.textContent =
+                    "Please enter a valid GitHub repository URL.";
+                return;
+            }
+
+            link.href = url;
+            link.hidden = false;
+
+            const checks = [
+                "htmlCheck", "cssCheck", "jsCheck",
+                "readmeCheck", "testCheck"
+            ];
+
+            const allComplete = checks.every(id =>
+                document.getElementById(id).checked
+            );
+
+            message.textContent = allComplete
+                ? "Checklist complete, " + name +
+                  "! Review and submit your repository."
+                : "Some checklist items are incomplete. Please finish them.";
+        }
+
+        // ASSIGNMENT 62: Reflection and portfolio
+        let reflectionText = "";
+
+        document.getElementById("reflectionForm")
+            .addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                const portfolio = document.getElementById("portfolio").value.trim();
+                let parsed;
+
+                try {
+                    parsed = new URL(portfolio);
+                } catch (error) {
+                    alert("Enter a valid portfolio URL.");
+                    return;
+                }
+
+                if (parsed.protocol !== "https:" &&
+                    parsed.protocol !== "http:") {
+                    alert("Portfolio URL must use HTTP or HTTPS.");
+                    return;
+                }
+
+                const fields = [
+                    ["Learning", "learning"],
+                    ["Challenges Faced", "challenge"],
+                    ["Feedback Received", "feedback"],
+                    ["Actions for Improvement", "actions"]
+                ];
+
+                reflectionText = "MY LEARNING REFLECTION\n\n";
+
+                const summary = document.getElementById("summary");
+                summary.replaceChildren();
+
+                fields.forEach(function(field) {
+                    const value =
+                        document.getElementById(field[1]).value.trim();
+
+                    reflectionText += field[0] + ":\n" + value + "\n\n";
+
+                    const heading = document.createElement("h4");
+                    heading.textContent = field[0];
+
+                    const paragraph = document.createElement("p");
+                    paragraph.textContent = value;
+
+                    summary.append(heading, paragraph);
+                });
+
+                reflectionText += "Portfolio: " + parsed.href;
+
+                const link = document.createElement("a");
+                link.href = parsed.href;
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+                link.textContent = "Visit Updated Portfolio";
+
+                summary.appendChild(link);
+                document.getElementById("reflectionOutput").hidden = false;
+            });
+
+        function downloadReflection() {
+            const blob = new Blob([reflectionText], {
+                type: "text/plain;charset=utf-8"
+            });
+
+            const downloadUrl = URL.createObjectURL(blob);
+            const anchor = document.createElement("a");
+
+            anchor.href = downloadUrl;
+            anchor.download = "learning-reflection.txt";
+            anchor.click();
+
+            setTimeout(function() {
+                URL.revokeObjectURL(downloadUrl);
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>

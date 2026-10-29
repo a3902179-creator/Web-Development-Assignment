@@ -1,0 +1,647 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments 45–49 | Web Storage</title>
+    <link rel="stylesheet" href="assign12.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Web Storage & Persistence</h1>
+        <p>Assignments 45–49 | JavaScript</p>
+        <nav>
+            <a href="#assignment45">45. Comparison</a>
+            <a href="#assignment46">46. Settings</a>
+            <a href="#assignment47">47. Storage Helper</a>
+            <a href="#assignment48">48. Lifecycle</a>
+            <a href="#assignment49">49. Persistent To-Do</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Assignment 45 -->
+        <section class="card" id="assignment45">
+            <h2>Assignment 45: localStorage vs sessionStorage</h2>
+            <p>
+                Both Web Storage APIs store key-value pairs in the browser.
+                Values are stored as strings.
+            </p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>localStorage</th>
+                            <th>sessionStorage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lifetime</td>
+                            <td>Until cleared or removed</td>
+                            <td>Usually until the tab session ends</td>
+                        </tr>
+                        <tr>
+                            <td>Page reload</td>
+                            <td>Data remains</td>
+                            <td>Data remains in the same tab</td>
+                        </tr>
+                        <tr>
+                            <td>Tab behavior</td>
+                            <td>Shared by same-origin pages</td>
+                            <td>Separate per tab session</td>
+                        </tr>
+                        <tr>
+                            <td>Data format</td>
+                            <td>String key-value pairs</td>
+                            <td>String key-value pairs</td>
+                        </tr>
+                        <tr>
+                            <td>Common use</td>
+                            <td>Theme and user preferences</td>
+                            <td>Temporary tab-specific state</td>
+                        </tr>
+                        <tr>
+                            <td>API example</td>
+                            <td>localStorage.setItem()</td>
+                            <td>sessionStorage.setItem()</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Example</h3>
+            <div class="button-row">
+                <button id="localDemoBtn">Save in localStorage</button>
+                <button id="sessionDemoBtn" class="secondary">Save in sessionStorage</button>
+                <button id="readStorageBtn" class="secondary">Read Both</button>
+                <button id="clearStorageBtn" class="danger">Clear Demo Data</button>
+            </div>
+            <pre id="storageDemoOutput" class="output">Click a button to test Web Storage.</pre>
+
+            <h3>Comparison Note</h3>
+            <p>
+                Use localStorage when information should survive browser restarts,
+                such as display preferences. Use sessionStorage for temporary data
+                needed only during a tab session. Neither API should store passwords
+                or sensitive authentication information.
+            </p>
+        </section>
+
+        <!-- Assignment 46 -->
+        <section class="card" id="assignment46">
+            <h2>Assignment 46: Persistent Settings Panel</h2>
+            <p>Change the settings below. Your preferences will be saved in localStorage.</p>
+
+            <div class="settings-panel">
+                <label for="themeSelect">Theme</label>
+                <select id="themeSelect">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+
+                <label for="fontSizeSelect">Font Size</label>
+                <select id="fontSizeSelect">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" id="compactMode">
+                    Enable compact mode
+                </label>
+
+                <div class="button-row">
+                    <button id="saveSettingsBtn">Save Settings</button>
+                    <button id="resetSettingsBtn" class="secondary">Reset Settings</button>
+                </div>
+                <p id="settingsStatus" class="status" aria-live="polite">
+                    Your saved settings will appear here.
+                </p>
+            </div>
+
+            <div id="settingsPreview" class="preview">
+                <h3>Live Preview</h3>
+                <p>This sample content shows your selected theme and font size.</p>
+            </div>
+        </section>
+
+        <!-- Assignment 47 -->
+        <section class="card" id="assignment47">
+            <h2>Assignment 47: Reusable Storage Helper</h2>
+            <p>
+                The <code>StorageHelper</code> object below provides reusable
+                methods to save, read, remove, and clear stored values.
+            </p>
+
+            <pre class="code-note">StorageHelper.set(key, value)
+StorageHelper.get(key, fallback)
+StorageHelper.remove(key)
+StorageHelper.clear()</pre>
+
+            <div class="form-group">
+                <label for="helperKey">Storage Key</label>
+                <input id="helperKey" type="text" value="studentName">
+
+                <label for="helperValue">Value</label>
+                <input id="helperValue" type="text" value="Ansh">
+
+                <div class="button-row">
+                    <button id="helperSaveBtn">Save Value</button>
+                    <button id="helperReadBtn" class="secondary">Read Value</button>
+                    <button id="helperRemoveBtn" class="danger">Remove Key</button>
+                </div>
+                <pre id="helperOutput" class="output">Storage helper is ready.</pre>
+            </div>
+        </section>
+
+        <!-- Assignment 48 -->
+        <section class="card" id="assignment48">
+            <h2>Assignment 48: Load–Update–Save–Render Lifecycle</h2>
+            <p>This lifecycle keeps an application's data consistent with its saved state.</p>
+
+            <ol class="lifecycle-list">
+                <li>
+                    <strong>Load</strong>
+                    <p>Read saved data from localStorage when the application starts.</p>
+                </li>
+                <li>
+                    <strong>Update</strong>
+                    <p>Modify the data in JavaScript when the user performs an action.</p>
+                </li>
+                <li>
+                    <strong>Save</strong>
+                    <p>Convert the updated data to JSON and write it to localStorage.</p>
+                </li>
+                <li>
+                    <strong>Render</strong>
+                    <p>Update the visible interface to match the current data.</p>
+                </li>
+            </ol>
+
+            <div class="lifecycle-demo">
+                <h3>Interactive Lifecycle Demo</h3>
+                <p>Current counter: <strong id="lifecycleCount">0</strong></p>
+                <div class="button-row">
+                    <button id="incrementBtn">Update Counter</button>
+                    <button id="reloadCounterBtn" class="secondary">Load Saved Counter</button>
+                    <button id="resetCounterBtn" class="danger">Reset Counter</button>
+                </div>
+                <pre id="lifecycleLog" class="output">Ready to demonstrate the lifecycle.</pre>
+            </div>
+        </section>
+
+        <!-- Assignment 49 -->
+        <section class="card" id="assignment49">
+            <h2>Assignment 49: Persistent To-Do App</h2>
+            <p>
+                Tasks are saved in localStorage, so they remain after a page reload
+                in the same browser and origin.
+            </p>
+
+            <form id="todoForm" class="todo-form">
+                <label for="todoInput">New Task</label>
+                <div class="input-row">
+                    <input id="todoInput" type="text"
+                           placeholder="Enter a task..." maxlength="150" required>
+                    <button type="submit">Add Task</button>
+                </div>
+            </form>
+
+            <div class="todo-toolbar">
+                <label for="todoFilter">Show</label>
+                <select id="todoFilter">
+                    <option value="all">All Tasks</option>
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <span id="todoCount">0 tasks</span>
+            </div>
+
+            <ul id="todoList" class="todo-list"></ul>
+            <p id="todoEmpty" class="empty-message">No tasks to display.</p>
+
+            <div class="button-row">
+                <button id="clearCompletedBtn" class="secondary">Clear Completed</button>
+                <button id="clearAllTodosBtn" class="danger">Delete All Tasks</button>
+            </div>
+
+            <p id="todoStatus" class="status" aria-live="polite"></p>
+
+            <h3>Testing Checklist</h3>
+            <p>Perform these checks before submitting the assignment.</p>
+            <div class="checklist">
+                <label><input type="checkbox"> Add a new task</label>
+                <label><input type="checkbox"> Complete and uncomplete a task</label>
+                <label><input type="checkbox"> Edit an existing task</label>
+                <label><input type="checkbox"> Delete a single task</label>
+                <label><input type="checkbox"> Filter all, active, and completed tasks</label>
+                <label><input type="checkbox"> Reload the page and verify tasks persist</label>
+                <label><input type="checkbox"> Clear completed tasks</label>
+                <label><input type="checkbox"> Delete all tasks</label>
+                <label><input type="checkbox"> Verify empty input is rejected</label>
+            </div>
+            <button id="resetChecklistBtn" class="secondary">Reset Checklist</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>Web Development Practical | Assignments 45–49</p>
+    </footer>
+
+    <script>
+        "use strict";
+
+        // Assignment 47: Reusable Storage Helper
+        const StorageHelper = {
+            set(key, value, storage = localStorage) {
+                try {
+                    storage.setItem(key, JSON.stringify(value));
+                    return true;
+                } catch (error) {
+                    console.error("Could not save storage value:", error);
+                    return false;
+                }
+            },
+
+            get(key, fallback = null, storage = localStorage) {
+                try {
+                    const value = storage.getItem(key);
+                    return value === null ? fallback : JSON.parse(value);
+                } catch (error) {
+                    console.error("Could not read storage value:", error);
+                    return fallback;
+                }
+            },
+
+            remove(key, storage = localStorage) {
+                try {
+                    storage.removeItem(key);
+                    return true;
+                } catch (error) {
+                    console.error("Could not remove storage value:", error);
+                    return false;
+                }
+            },
+
+            clear(storage = localStorage) {
+                try {
+                    storage.clear();
+                    return true;
+                } catch (error) {
+                    console.error("Could not clear storage:", error);
+                    return false;
+                }
+            }
+        };
+
+        // Assignment 45: localStorage and sessionStorage comparison demo
+        const storageDemoOutput = document.getElementById("storageDemoOutput");
+
+        document.getElementById("localDemoBtn").addEventListener("click", () => {
+            const ok = StorageHelper.set(
+                "assignment45LocalDemo",
+                "Saved with localStorage",
+                localStorage
+            );
+            storageDemoOutput.textContent = ok
+                ? "Saved in localStorage. It can persist after the browser closes."
+                : "Could not save in localStorage.";
+        });
+
+        document.getElementById("sessionDemoBtn").addEventListener("click", () => {
+            const ok = StorageHelper.set(
+                "assignment45SessionDemo",
+                "Saved with sessionStorage",
+                sessionStorage
+            );
+            storageDemoOutput.textContent = ok
+                ? "Saved in sessionStorage. It lasts for this tab session."
+                : "Could not save in sessionStorage.";
+        });
+
+        document.getElementById("readStorageBtn").addEventListener("click", () => {
+            storageDemoOutput.textContent =
+                "localStorage: " +
+                (localStorage.getItem("assignment45LocalDemo") ?? "No demo value") +
+                "\nsessionStorage: " +
+                (sessionStorage.getItem("assignment45SessionDemo") ?? "No demo value");
+        });
+
+        document.getElementById("clearStorageBtn").addEventListener("click", () => {
+            StorageHelper.remove("assignment45LocalDemo", localStorage);
+            StorageHelper.remove("assignment45SessionDemo", sessionStorage);
+            storageDemoOutput.textContent = "Demo values cleared.";
+        });
+
+        // Assignment 46: Persistent settings panel
+        const SETTINGS_KEY = "assignment46Settings";
+        const defaultSettings = {
+            theme: "light",
+            fontSize: "medium",
+            compact: false
+        };
+
+        const themeSelect = document.getElementById("themeSelect");
+        const fontSizeSelect = document.getElementById("fontSizeSelect");
+        const compactMode = document.getElementById("compactMode");
+        const settingsPreview = document.getElementById("settingsPreview");
+        const settingsStatus = document.getElementById("settingsStatus");
+
+        function loadSettings() {
+            const saved = StorageHelper.get(SETTINGS_KEY, defaultSettings);
+            const validThemes = ["light", "dark"];
+            const validSizes = ["small", "medium", "large"];
+
+            return {
+                theme: validThemes.includes(saved?.theme) ? saved.theme : "light",
+                fontSize: validSizes.includes(saved?.fontSize)
+                    ? saved.fontSize
+                    : "medium",
+                compact: typeof saved?.compact === "boolean"
+                    ? saved.compact
+                    : false
+            };
+        }
+
+        function renderSettings(settings) {
+            document.body.dataset.theme = settings.theme;
+            document.body.dataset.fontSize = settings.fontSize;
+            document.body.classList.toggle("compact-mode", settings.compact);
+
+            settingsPreview.dataset.theme = settings.theme;
+            settingsPreview.dataset.fontSize = settings.fontSize;
+            settingsPreview.classList.toggle("compact-mode", settings.compact);
+
+            themeSelect.value = settings.theme;
+            fontSizeSelect.value = settings.fontSize;
+            compactMode.checked = settings.compact;
+        }
+
+        function readSettingsForm() {
+            return {
+                theme: themeSelect.value,
+                fontSize: fontSizeSelect.value,
+                compact: compactMode.checked
+            };
+        }
+
+        function saveSettings() {
+            const settings = readSettingsForm();
+            const success = StorageHelper.set(SETTINGS_KEY, settings);
+
+            if (success) {
+                renderSettings(settings);
+                settingsStatus.textContent = "Settings saved successfully!";
+            } else {
+                settingsStatus.textContent = "Could not save settings.";
+            }
+        }
+
+        [themeSelect, fontSizeSelect, compactMode].forEach(control => {
+            control.addEventListener("change", () => {
+                renderSettings(readSettingsForm());
+                settingsStatus.textContent = "Preview updated. Click Save Settings to persist.";
+            });
+        });
+
+        document.getElementById("saveSettingsBtn").addEventListener("click", saveSettings);
+
+        document.getElementById("resetSettingsBtn").addEventListener("click", () => {
+            renderSettings(defaultSettings);
+            if (StorageHelper.set(SETTINGS_KEY, defaultSettings)) {
+                settingsStatus.textContent = "Settings reset to defaults.";
+            } else {
+                settingsStatus.textContent = "Could not save default settings.";
+            }
+        });
+
+        // Assignment 47: Test the reusable StorageHelper
+        const helperKey = document.getElementById("helperKey");
+        const helperValue = document.getElementById("helperValue");
+        const helperOutput = document.getElementById("helperOutput");
+
+        document.getElementById("helperSaveBtn").addEventListener("click", () => {
+            const key = helperKey.value.trim();
+            if (!key) {
+                helperOutput.textContent = "Please enter a storage key.";
+                return;
+            }
+
+            const success = StorageHelper.set(key, helperValue.value);
+            helperOutput.textContent = success
+                ? `Saved key "${key}" with value "${helperValue.value}".`
+                : "Save failed.";
+        });
+
+        document.getElementById("helperReadBtn").addEventListener("click", () => {
+            const key = helperKey.value.trim();
+            if (!key) {
+                helperOutput.textContent = "Please enter a storage key.";
+                return;
+            }
+
+            const value = StorageHelper.get(key, "(key not found)");
+            helperOutput.textContent =
+                `Key: ${key}\nValue: ${JSON.stringify(value)}`;
+        });
+
+        document.getElementById("helperRemoveBtn").addEventListener("click", () => {
+            const key = helperKey.value.trim();
+            if (!key) {
+                helperOutput.textContent = "Please enter a storage key.";
+                return;
+            }
+
+            StorageHelper.remove(key);
+            helperOutput.textContent = `Removed key "${key}" if it existed.`;
+        });
+
+        // Assignment 48: Load -> Update -> Save -> Render
+        const COUNTER_KEY = "assignment48Counter";
+        const lifecycleCount = document.getElementById("lifecycleCount");
+        const lifecycleLog = document.getElementById("lifecycleLog");
+        let counter = 0;
+
+        function renderCounter() {
+            lifecycleCount.textContent = String(counter);
+        }
+
+        function loadCounter() {
+            counter = StorageHelper.get(COUNTER_KEY, 0);
+            if (!Number.isFinite(counter)) counter = 0;
+            renderCounter();
+            lifecycleLog.textContent = "LOAD: Read saved counter.\nRENDER: Updated the display.";
+        }
+
+        document.getElementById("incrementBtn").addEventListener("click", () => {
+            counter++; // UPDATE
+            const success = StorageHelper.set(COUNTER_KEY, counter); // SAVE
+            renderCounter(); // RENDER
+
+            lifecycleLog.textContent =
+                "UPDATE: Increased counter.\n" +
+                (success ? "SAVE: Counter saved to localStorage.\n" :
+                    "SAVE: Could not save the counter.\n") +
+                "RENDER: Display updated.";
+        });
+
+        document.getElementById("reloadCounterBtn").addEventListener("click", loadCounter);
+
+        document.getElementById("resetCounterBtn").addEventListener("click", () => {
+            counter = 0;
+            const success = StorageHelper.set(COUNTER_KEY, counter);
+            renderCounter();
+            lifecycleLog.textContent =
+                "UPDATE: Reset counter.\n" +
+                (success ? "SAVE: Reset value saved.\n" : "SAVE: Could not save value.\n") +
+                "RENDER: Display updated.";
+        });
+
+        // Assignment 49: Persistent To-Do App
+        const TODO_KEY = "assignment49Todos";
+        let todos = StorageHelper.get(TODO_KEY, []);
+        if (!Array.isArray(todos)) todos = [];
+
+        const todoForm = document.getElementById("todoForm");
+        const todoInput = document.getElementById("todoInput");
+        const todoFilter = document.getElementById("todoFilter");
+        const todoList = document.getElementById("todoList");
+        const todoCount = document.getElementById("todoCount");
+        const todoEmpty = document.getElementById("todoEmpty");
+        const todoStatus = document.getElementById("todoStatus");
+
+        function saveTodos() {
+            const success = StorageHelper.set(TODO_KEY, todos);
+            todoStatus.textContent = success
+                ? "Tasks saved successfully."
+                : "Warning: tasks could not be saved to storage.";
+            return success;
+        }
+
+        function renderTodos() {
+            todoList.replaceChildren();
+
+            const filter = todoFilter.value;
+            const visibleTodos = todos.filter(todo => {
+                if (filter === "active") return !todo.completed;
+                if (filter === "completed") return todo.completed;
+                return true;
+            });
+
+            visibleTodos.forEach(todo => {
+                const li = document.createElement("li");
+                li.className = "todo-item";
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = Boolean(todo.completed);
+                checkbox.setAttribute("aria-label", "Mark task completed");
+
+                checkbox.addEventListener("change", () => {
+                    todo.completed = checkbox.checked;
+                    saveTodos();
+                    renderTodos();
+                });
+
+                const text = document.createElement("span");
+                text.className = todo.completed ? "todo-text completed" : "todo-text";
+                text.textContent = todo.text;
+
+                const editButton = document.createElement("button");
+                editButton.type = "button";
+                editButton.textContent = "Edit";
+                editButton.className = "secondary";
+                editButton.addEventListener("click", () => {
+                    const updated = prompt("Edit task:", todo.text);
+                    if (updated === null) return;
+
+                    const cleaned = updated.trim();
+                    if (!cleaned) {
+                        todoStatus.textContent = "Task cannot be empty.";
+                        return;
+                    }
+
+                    todo.text = cleaned;
+                    saveTodos();
+                    renderTodos();
+                });
+
+                const deleteButton = document.createElement("button");
+                deleteButton.type = "button";
+                deleteButton.textContent = "Delete";
+                deleteButton.className = "danger";
+                deleteButton.addEventListener("click", () => {
+                    todos = todos.filter(item => item.id !== todo.id);
+                    saveTodos();
+                    renderTodos();
+                });
+
+                li.append(checkbox, text, editButton, deleteButton);
+                todoList.appendChild(li);
+            });
+
+            const activeCount = todos.filter(todo => !todo.completed).length;
+            todoCount.textContent =
+                `${todos.length} total | ${activeCount} active | ` +
+                `${todos.length - activeCount} completed`;
+
+            todoEmpty.hidden = visibleTodos.length !== 0;
+        }
+
+        todoForm.addEventListener("submit", event => {
+            event.preventDefault();
+            const text = todoInput.value.trim();
+
+            if (!text) {
+                todoStatus.textContent = "Please enter a task.";
+                todoInput.focus();
+                return;
+            }
+
+            todos.push({
+                id: Date.now() + Math.random(),
+                text,
+                completed: false
+            });
+
+            todoInput.value = "";
+            todoFilter.value = "all";
+            saveTodos();
+            renderTodos();
+            todoInput.focus();
+        });
+
+        todoFilter.addEventListener("change", renderTodos);
+
+        document.getElementById("clearCompletedBtn").addEventListener("click", () => {
+            todos = todos.filter(todo => !todo.completed);
+            saveTodos();
+            renderTodos();
+        });
+
+        document.getElementById("clearAllTodosBtn").addEventListener("click", () => {
+            if (!confirm("Delete all saved tasks?")) return;
+            todos = [];
+            saveTodos();
+            renderTodos();
+        });
+
+        document.getElementById("resetChecklistBtn").addEventListener("click", () => {
+            document.querySelectorAll("#assignment49 .checklist input").forEach(input => {
+                input.checked = false;
+            });
+        });
+
+        // Initial LOAD and RENDER when the page starts
+        renderSettings(loadSettings());
+        loadCounter();
+        renderTodos();
+    </script>
+</body>
+</html>
+```
